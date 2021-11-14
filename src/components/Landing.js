@@ -23,7 +23,12 @@ function Landing() {
           justifyContent: "space-between",
         }}
       >
-        <Box sx={{ maxWidth: 500, width: "100%" }}>
+        <Box
+          sx={{
+            maxWidth: 500,
+            width: "100%",
+          }}
+        >
           <Typography
             sx={{
               fontSize: 42,
@@ -35,7 +40,13 @@ function Landing() {
             One Stop Solution for all your CFO needs
           </Typography>
           <Typography
-            sx={{ fontSize: 24, color: colors.dimText, mt: 4, mb: 7.5 }}
+            sx={{
+              fontWeight: 400,
+              fontSize: 22,
+              color: colors.dimText,
+              mt: 4,
+              mb: 6.5,
+            }}
           >
             Enabling entrepreneurs to focus on business, leave finance support
             functions to trained professionals.
@@ -48,6 +59,7 @@ function Landing() {
               fontSize: 18,
               px: 2.5,
               color: colors.bgLanding,
+              fontFamily: "'Roboto', sans-serif !important",
               "&:hover": { backgroundColor: colors.paleYellow },
             }}
           >

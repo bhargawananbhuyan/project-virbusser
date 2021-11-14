@@ -8,6 +8,7 @@ const colors = {
   dimCard: "#a8a8a8",
   blurCard: "#424346",
   dimBg: "#3e3f42",
+  rRed: "#c03647",
 };
 
 export default colors;
