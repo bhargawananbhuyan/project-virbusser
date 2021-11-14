@@ -89,12 +89,64 @@ const WhyGrid = () => (
         "& div": {
           backgroundColor: colors.darkTile,
           borderRadius: 5,
+          p: 5,
+          display: "flex",
+          alignItems: "flex-end",
         },
       }}
     >
-      {[1, 2, 3, 4].map((i) => (
-        <Box key={i} />
-      ))}
+      {/* "One stop shop for all things CFO, and a little more",
+        "Trained finance & Accounting professionals with industry experience",
+        "End-to-end landscape including payroll, InfoSec and Technology",
+        "", */}
+      <Box>
+        <Typography
+          sx={{
+            fontWeight: "bold",
+            fontSize: 22,
+            color: "whitesmoke",
+            "& span": { color: colors.dimText },
+          }}
+        >
+          One stop shop for all things CFO, <span>and a little more</span>
+        </Typography>
+      </Box>
+      <Box>
+        <Typography
+          sx={{
+            fontWeight: "bold",
+            fontSize: 22,
+            color: "whitesmoke",
+            "& span": { color: colors.dimText },
+          }}
+        >
+          Trained finance & Accounting professionals <span>with</span> industry
+          experience
+        </Typography>
+      </Box>
+      <Box>
+        <Typography
+          sx={{
+            fontWeight: "bold",
+            fontSize: 22,
+            color: "whitesmoke",
+            "& span": { color: colors.dimText },
+          }}
+        >
+          End-to-end landscape including payroll, InfoSec{" "}
+          <span>and technology</span>
+        </Typography>
+      </Box>
+      <Box>
+        <Typography
+          sx={{
+            fontWeight: "bold",
+            fontSize: 22,
+            color: "whitesmoke",
+            "& span": { color: colors.dimText },
+          }}
+        ></Typography>
+      </Box>
     </Box>
   </Box>
 );

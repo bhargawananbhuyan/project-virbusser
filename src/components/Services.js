@@ -44,7 +44,7 @@ const ClientsGrid = () => (
           backgroundColor: colors.darkTile,
           borderRadius: 3,
           zIndex: 10,
-          mt: -2.5,
+          mt: -20,
         }}
       ></Box>
     ))}
@@ -53,19 +53,7 @@ const ClientsGrid = () => (
 
 function Services() {
   return (
-    <Box sx={{ position: "relative" }}>
-      {/* clients box */}
-      <Box
-        sx={{
-          width: "100%",
-          height: 150,
-          backgroundColor: colors.bgLanding,
-          position: "absolute",
-          top: 0,
-          left: 0,
-          zIndex: 9,
-        }}
-      />
+    <Box>
       <Box sx={{ display: "flex", justifyContent: "center" }}>
         <ClientsGrid />
       </Box>
