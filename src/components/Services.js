@@ -1,3 +1,4 @@
+import { AccountBalanceOutlined } from "@mui/icons-material";
 import { Container, Typography, useTheme } from "@mui/material";
 import { Box } from "@mui/system";
 import colors from "../utils/myColors";
@@ -11,7 +12,12 @@ function Services() {
       <Box sx={{ display: "flex", placeContent: "center" }}>
         <Box sx={classes.clientGridContainer}>
           {[1, 2, 3, 4].map((i) => (
-            <Box key={i} sx={classes.clientGridElement}></Box>
+            <Box key={i} sx={classes.clientGridElement}>
+              <Typography component="div">
+                <span>25+</span>
+                <span>clients</span>
+              </Typography>
+            </Box>
           ))}
         </Box>
       </Box>
@@ -22,7 +28,14 @@ function Services() {
         <Box sx={classes.allServicesContent}>
           <Box sx={classes.serviceGridContainer}>
             {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((i) => (
-              <Box key={i} sx={classes.serviceGridElement}></Box>
+              <Box key={i} sx={classes.serviceGridElement}>
+                <Box component="section">
+                  <div>
+                    <AccountBalanceOutlined />
+                  </div>
+                  <Typography paragraph>Budgeting & forecasting</Typography>
+                </Box>
+              </Box>
             ))}
           </Box>
 
@@ -56,6 +69,24 @@ const useStyles = (theme) => ({
     zIndex: 10,
     mx: 1.5,
     my: 1.5,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    "& div": {
+      display: "flex",
+      flexDirection: "column",
+    },
+    "& span": {
+      "&:first-child": {
+        fontSize: 55,
+        fontWeight: "bold",
+        color: colors.lightGreen,
+      },
+      "&:nth-child(2)": {
+        fontSize: 24,
+        color: "whitesmoke",
+      },
+    },
     [theme.breakpoints.down("md")]: {
       height: 325,
       width: 325,
@@ -128,6 +159,27 @@ const useStyles = (theme) => ({
     [theme.breakpoints.down("md")]: {
       width: 350,
       height: 250,
+    },
+
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+
+    "& section": {
+      p: 3.5,
+      display: "flex",
+      flexDirection: "column",
+
+      [theme.breakpoints.down("md")]: {
+        alignItems: "center",
+      },
+
+      "& svg": { fontSize: 50, color: colors.lightGreen },
+      "& p": {
+        fontSize: 18,
+        mt: 3,
+        color: colors.dimText,
+      },
     },
   },
 
