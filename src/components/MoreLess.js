@@ -1,8 +1,12 @@
-import { Container, Typography } from "@mui/material";
+import { Container, Typography, useTheme } from "@mui/material";
 import { Box } from "@mui/system";
 import colors from "../utils/myColors";
 
 function MoreLess() {
+  const theme = useTheme();
+
+  const classes = useStyles(theme);
+
   return (
     <Box>
       <Container maxWidth="xl">
@@ -14,14 +18,7 @@ function MoreLess() {
         </Typography>
       </Container>
 
-      <Box
-        sx={{
-          display: "grid",
-          gridTemplateColumns: "300px auto 300px",
-          gridTemplateRows: "repeat(2, 525px)",
-          rowGap: 12,
-        }}
-      >
+      <Box sx={classes.moloGrid}>
         <Box
           sx={{
             gridRow: "1",
@@ -152,5 +149,14 @@ function MoreLess() {
     </Box>
   );
 }
+
+const useStyles = (theme) => ({
+  moloGrid: {
+    display: "grid",
+    gridTemplateColumns: "300px auto 300px",
+    gridTemplateRows: "repeat(2, 525px)",
+    rowGap: 12,
+  },
+});
 
 export default MoreLess;
