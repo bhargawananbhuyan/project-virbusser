@@ -1,5 +1,5 @@
 import { Container, Typography, useTheme } from "@mui/material";
-import { Box, color } from "@mui/system";
+import { Box } from "@mui/system";
 import colors from "../utils/myColors";
 
 function MoreLess() {
