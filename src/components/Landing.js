@@ -83,7 +83,6 @@ const useStyles = (theme) => ({
       "&:hover": { backgroundColor: colors.paleYellow },
     },
     [theme.breakpoints.down("md")]: {
-      textAlign: "center",
       "& h5": { fontSize: 30 },
       "& section": { fontSize: 18 },
       "& button": { fontSize: 16 },

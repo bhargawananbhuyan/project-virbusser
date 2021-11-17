@@ -1,21 +1,15 @@
-import { Typography } from "@mui/material";
+import { Typography, useTheme } from "@mui/material";
 import { Box } from "@mui/system";
 import colors from "../utils/myColors";
 
 function Footer() {
+  const theme = useTheme();
+
+  const classes = useStyles(theme);
+
   return (
-    <Box
-      component="footer"
-      sx={{
-        backgroundColor: colors.bgLanding,
-        display: "flex",
-        justifyContent: "space-around",
-        py: 5,
-        px: 3,
-        alignItems: "center",
-      }}
-    >
-      <Typography sx={{ fontSize: 32, fontWeight: "bold" }}>
+    <Box component="footer" sx={classes.root}>
+      <Typography sx={classes.logo}>
         {"VirBusSer".split("").map((i, index) => (
           <span
             style={{
@@ -27,18 +21,7 @@ function Footer() {
         ))}
       </Typography>
 
-      <Box
-        sx={{
-          display: "grid",
-          gridTemplateColumns: "repeat(4, 125px)",
-          gridTemplateRows: "125px",
-          "& div": {
-            backgroundColor: colors.bgPrimary,
-            borderRadius: 3,
-          },
-          columnGap: 3,
-        }}
-      >
+      <Box sx={classes.itemsContainer}>
         {[1, 2, 3, 4].map((i) => (
           <Box />
         ))}
@@ -46,5 +29,49 @@ function Footer() {
     </Box>
   );
 }
+
+const useStyles = (theme) => ({
+  root: {
+    backgroundColor: colors.bgLanding,
+    display: "flex",
+    justifyContent: "space-around",
+    py: 5,
+    px: 3,
+    alignItems: "center",
+
+    [theme.breakpoints.down("lg")]: {
+      flexDirection: "column",
+    },
+  },
+
+  logo: {
+    fontSize: 32,
+    fontWeight: "bold",
+    [theme.breakpoints.down("md")]: {
+      fontSize: 24,
+      mb: 3.5,
+    },
+  },
+
+  itemsContainer: {
+    display: "flex",
+    flexWrap: "wrap",
+    alignItems: "center",
+    justifyContent: "center",
+    "& div": {
+      backgroundColor: colors.bgPrimary,
+      borderRadius: 3,
+      height: 125,
+      width: 125,
+      mx: 1,
+      [theme.breakpoints.down("lg")]: {
+        mt: 5,
+      },
+      [theme.breakpoints.down("md")]: {
+        mt: 2,
+      },
+    },
+  },
+});
 
 export default Footer;

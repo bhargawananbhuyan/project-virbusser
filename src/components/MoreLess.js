@@ -2,6 +2,22 @@ import { Container, Typography, useTheme } from "@mui/material";
 import { Box } from "@mui/system";
 import colors from "../utils/myColors";
 
+const moreOfs = [
+  { title: "Process standardization", imageId: "02" },
+  { title: "Business planning", imageId: "03" },
+  { title: "Staff employment", imageId: "04" },
+  { title: "Technology interventions", imageId: "06" },
+  { title: "Innovations", imageId: "05" },
+];
+
+const lessOfs = [
+  { title: "Social communication", imageId: "14" },
+  { title: "Gossip", imageId: "15" },
+  { title: "Junk communication", imageId: "16" },
+  { title: "Phone calls", imageId: "06" },
+  { title: "Spam messages", imageId: "05" },
+];
+
 function MoreLess() {
   const theme = useTheme();
 
@@ -13,75 +29,69 @@ function MoreLess() {
         <Typography component="h2">What we do?</Typography>
       </Container>
 
+      {/* more of grid */}
       <Box sx={classes.moloGridContainer}>
+        <Box sx={classes.moreOfText}>
+          <Typography paragraph sx={{ color: colors.lightGreen }}>
+            more of
+          </Typography>
+        </Box>
         <Box
           sx={{
             ...classes.moloGridBase,
             gridRow: "1",
-            gridColumn: "2/4",
-            borderTopLeftRadius: 15,
-            borderBottomLeftRadius: 15,
+            gridColumn: "3/6",
           }}
         >
-          <Typography paragraph sx={classes.moreOfText}>
-            more of
-          </Typography>
-          <Box
-            sx={{
-              ...classes.moloGridContent,
-              ...classes.moreOfGrid,
-            }}
-          >
-            {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((i) => (
-              <Box sx={{ mr: 5 }} />
+          <Box sx={{ left: 0, bottom: 100 }}>
+            {moreOfs.map((mf, i) => (
+              <Box
+                component="section"
+                key={i}
+                sx={{ ...classes.moloCard, "&:last-child": { mr: 3 } }}
+              >
+                <div>
+                  <Typography paragraph>{mf.title}</Typography>
+                  <img
+                    src={`/assets/Virbusser website-${mf.imageId}.png`}
+                    alt={mf.title.toLowerCase()}
+                  />
+                </div>
+              </Box>
             ))}
           </Box>
         </Box>
 
+        <Box sx={classes.lessOfText}>
+          <Typography paragraph>less of</Typography>
+        </Box>
         <Box
           sx={{
             ...classes.moloGridBase,
             gridRow: "2",
-            gridColumn: "1/3",
-            borderTopRightRadius: 15,
-            borderBottomRightRadius: 15,
+            gridColumn: "1/4",
             direction: "rtl",
           }}
         >
-          <Typography paragraph sx={classes.lessOfText}>
-            less of
-          </Typography>
-
-          <Box sx={{ ...classes.moloGridContent, ...classes.lessOfGrid }}>
-            {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((i) => (
-              <Box sx={{ ml: 5 }} />
+          <Box sx={{ right: 0, bottom: 100 }}>
+            {lessOfs.map((lf, i) => (
+              <Box
+                component="section"
+                key={i}
+                sx={{ ...classes.moloCard, "&:last-child": { ml: 3 } }}
+              >
+                <div style={{ textAlign: "left", alignItems: "flex-end" }}>
+                  <Typography paragraph>{lf.title}</Typography>
+                  <img
+                    src={`/assets/Virbusser website-${lf.imageId}.png`}
+                    alt={lf.title.toLowerCase()}
+                  />
+                </div>
+              </Box>
             ))}
           </Box>
         </Box>
       </Box>
-
-      {/* <Box
-          sx={{
-            width: "100vw",
-            height: 500,
-            backgroundColor: colors.darkTile,
-            // ml: 10,
-            mb: 12,
-            borderTopLeftRadius: 15,
-            borderBottomLeftRadius: 15,
-          }}
-        />
-
-        <Box
-          sx={{
-            width: "100vw",
-            height: 500,
-            backgroundColor: colors.darkTile,
-            ml: -65,
-            borderTopRightRadius: 15,
-            borderBottomRightRadius: 15,
-          }}
-        /> */}
     </Box>
   );
 }
@@ -106,21 +116,19 @@ const useStyles = (theme) => ({
 
   moloGridContainer: {
     display: "grid",
-    gridTemplateColumns: "300px auto 300px",
-    gridTemplateRows: "repeat(2, 525px)",
-    rowGap: 12,
+    gridTemplateColumns: "300px 100px auto 100px 300px",
+    gridTemplateRows: "repeat(2, 500px)",
+    rowGap: 10,
     [theme.breakpoints.down("md")]: {
-      gridTemplateColumns: "50px auto 50px",
+      gridTemplateColumns: "50px 75px auto 75px 50px",
       gridTemplateRows: "repeat(2, 400px)",
-      rowGap: 6,
     },
   },
 
   moloGridBase: {
     backgroundColor: colors.darkTile,
-    p: 6.5,
     position: "relative",
-    overflowX: "scroll",
+    overflowX: "scroll !important",
     scrollbarWidth: "none",
     msOverflowStyle: "hidden",
     "&::-webkit-scrollbar": {
@@ -128,61 +136,100 @@ const useStyles = (theme) => ({
       height: 0,
     },
 
-    [theme.breakpoints.down("md")]: {
-      p: 3,
+    "& div": {
+      display: "flex",
+      columnGap: 3,
+      position: "absolute",
     },
   },
 
-  moreOfGrid: {
-    left: 75,
-    [theme.breakpoints.down("md")]: {
-      left: 55,
-    },
-  },
+  moloCard: {
+    height: 250,
+    width: 250,
+    backgroundColor: colors.bgPrimary,
+    borderRadius: 3,
 
-  lessOfGrid: {
-    right: 75,
     [theme.breakpoints.down("md")]: {
-      right: 55,
+      height: 200,
+      width: 200,
+      mb: -3,
+    },
+
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+
+    "& div": {
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "flex-start",
+      ml: -3,
+      [theme.breakpoints.down("md")]: { ml: 0 },
+    },
+    "& p": {
+      fontSize: 20,
+      fontWeight: "bold",
+      width: 165,
+      color: "whitesmoke",
+      [theme.breakpoints.down("md")]: { fontSize: 16, width: 150 },
+    },
+    "& img": {
+      height: 75,
+      width: 75,
+      mt: 2,
+      [theme.breakpoints.down("md")]: {
+        height: 60,
+        width: 60,
+      },
     },
   },
 
   moreOfText: {
-    fontSize: 30,
-    fontWeight: "bold",
-    mb: 5,
-    ml: 10,
-    color: colors.lightGreen,
-    [theme.breakpoints.down("md")]: {
-      mb: 3.5,
-      ml: 7.5,
+    gridRow: "1",
+    gridColumn: "2",
+    backgroundColor: colors.darkTile,
+    borderTopLeftRadius: 15,
+    borderBottomLeftRadius: 15,
+    position: "relative",
+
+    "& p": {
+      position: "absolute",
+      fontSize: 36,
+      zIndex: 10,
+      width: 200,
+      fontWeight: "bold",
+      color: colors.lightGreen,
+      left: 135,
+      top: 50,
+      [theme.breakpoints.down("md")]: {
+        left: 100,
+        top: 40,
+        fontSize: 28,
+      },
     },
   },
 
   lessOfText: {
-    fontSize: 30,
-    fontWeight: "bold",
-    color: colors.rRed,
-    mb: 5,
-    mr: 10,
-    [theme.breakpoints.down("md")]: {
-      mb: 3.5,
-      mr: 7.5,
-    },
-  },
+    gridRow: "2",
+    gridColumn: "4",
+    backgroundColor: colors.darkTile,
+    borderTopRightRadius: 15,
+    borderBottomRightRadius: 15,
+    position: "relative",
 
-  moloGridContent: {
-    display: "flex",
-    position: "absolute",
-
-    "& div": {
-      width: 300,
-      height: 300,
-      backgroundColor: colors.dimBg,
-      borderRadius: 3,
+    "& p": {
+      position: "absolute",
+      fontSize: 36,
+      zIndex: 10,
+      width: 200,
+      fontWeight: "bold",
+      color: colors.rRed,
+      right: 65,
+      top: 50,
       [theme.breakpoints.down("md")]: {
-        height: 250,
-        width: 250,
+        right: 0,
+        top: 40,
+        fontSize: 28,
       },
     },
   },

@@ -1,4 +1,3 @@
-import { AccountBalanceOutlined } from "@mui/icons-material";
 import { Container, Typography, useTheme } from "@mui/material";
 import { Box } from "@mui/system";
 import colors from "../utils/myColors";
@@ -27,16 +26,56 @@ function Services() {
 
         <Box sx={classes.allServicesContent}>
           <Box sx={classes.serviceGridContainer}>
-            {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((i) => (
-              <Box key={i} sx={classes.serviceGridElement}>
-                <Box component="section">
-                  <div>
-                    <AccountBalanceOutlined />
-                  </div>
-                  <Typography paragraph>Budgeting & forecasting</Typography>
-                </Box>
+            <Box sx={classes.serviceGridElement}>
+              <Box component="section">
+                <div>
+                  <img src={`/assets/Virbusser website-${17}.png`} alt="" />
+                </div>
+                <Typography paragraph>Budgeting & forecasting</Typography>
               </Box>
-            ))}
+            </Box>
+            <Box sx={classes.serviceGridElement}>
+              <Box component="section">
+                <div>
+                  <img src={`/assets/Virbusser website-${18}.png`} alt="" />
+                </div>
+                <Typography paragraph>Reporting & MIS</Typography>
+              </Box>
+            </Box>
+            <Box sx={classes.serviceGridElement}>
+              <Box component="section">
+                <div>
+                  <img src={`/assets/Virbusser website-${20}.png`} alt="" />
+                </div>
+                <Typography paragraph>
+                  Fund raising & Capital structuring
+                </Typography>
+              </Box>
+            </Box>
+            <Box sx={classes.serviceGridElement}>
+              <Box component="section">
+                <div>
+                  <img src={`/assets/Virbusser website-${19}.png`} alt="" />
+                </div>
+                <Typography paragraph>Statutory Compliance</Typography>
+              </Box>
+            </Box>
+            <Box sx={classes.serviceGridElement}>
+              <Box component="section">
+                <div>
+                  <img src={`/assets/Virbusser website-${21}.png`} alt="" />
+                </div>
+                <Typography paragraph>Controls & Internal Audit</Typography>
+              </Box>
+            </Box>
+            <Box sx={classes.serviceGridElement}>
+              <Box component="section">
+                <div>
+                  <img src={`/assets/Virbusser website-${22}.png`} alt="" />
+                </div>
+                <Typography paragraph>Book Reviews</Typography>
+              </Box>
+            </Box>
           </Box>
 
           <Box sx={classes.budgetingContainer}>
@@ -88,8 +127,8 @@ const useStyles = (theme) => ({
       },
     },
     [theme.breakpoints.down("md")]: {
-      height: 325,
-      width: 325,
+      height: 300,
+      width: 300,
     },
   },
 
@@ -133,37 +172,43 @@ const useStyles = (theme) => ({
     display: "flex",
     flexWrap: "wrap",
     placeContent: "center",
+    rowGap: 3,
+    columnGap: 3,
   },
   serviceGridElement: {
+    cursor: "pointer",
     height: 250,
     width: 250,
     backgroundColor: colors.darkTile,
     borderRadius: 3,
-    mb: 3,
-    mx: 2,
-    [theme.breakpoints.up("md")]: {
-      "&:nth-child(3n)": {
-        mt: -4.5,
+    "&:nth-child(2)": { mt: 5 },
+    "&:nth-child(5)": { mt: -5 },
+    "&:nth-child(3)": { mt: 10 },
+    "&:nth-child(4)": { mt: -10 },
+    "&:hover": {
+      backgroundColor: colors.lightGreen,
+      boxShadow: "5px 5px 51px 10px rgba(81,196,137,0.74)",
+      "& section": {
+        "& p": {
+          color: "whitesmoke",
+        },
       },
-      "&:nth-child(3n + 2)": {
-        mt: 3,
-      },
+      transition: ".2s ease",
     },
 
     [theme.breakpoints.down("lg")]: {
       mt: 0,
-      width: 250,
-      height: 250,
-      my: 1.5,
-    },
-    [theme.breakpoints.down("md")]: {
-      width: 350,
-      height: 250,
+      width: 300,
+      height: 300,
+      "&:nth-child(2)": { mt: 0 },
+      "&:nth-child(5)": { mt: 0 },
+      "&:nth-child(3)": { mt: 0 },
+      "&:nth-child(4)": { mt: 0 },
     },
 
     display: "flex",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "flex-start",
 
     "& section": {
       p: 3.5,
@@ -171,24 +216,34 @@ const useStyles = (theme) => ({
       flexDirection: "column",
 
       [theme.breakpoints.down("md")]: {
-        alignItems: "center",
+        alignItems: "flex-start",
       },
 
-      "& svg": { fontSize: 50, color: colors.lightGreen },
+      "& img": {
+        height: 100,
+        width: 100,
+      },
+
       "& p": {
-        fontSize: 18,
-        mt: 3,
+        fontSize: 16,
+        fontWeight: "bold",
         color: colors.dimText,
+        width: 125,
+        [theme.breakpoints.down("md")]: {
+          width: 200,
+          fontSize: 18,
+        },
       },
     },
   },
 
   budgetingContainer: {
-    textAlign: "center",
+    // textAlign: "center",
     mt: 3,
-    [theme.breakpoints.up("xl")]: {
-      textAlign: "left",
-    },
+    // [theme.breakpoints.up("xl")]: {
+    //   textAlign: "left",
+    // },
+    color: colors.dimText,
     [theme.breakpoints.up("lg")]: {
       mt: 10,
       ml: 3.5,
