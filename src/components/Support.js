@@ -1,6 +1,8 @@
 import { Container, Typography, useTheme } from "@mui/material";
 import { Box } from "@mui/system";
 import colors from "../utils/myColors";
+import Fade from "react-reveal/Fade";
+import Reveal from "react-reveal/Reveal";
 
 function Support() {
   const theme = useTheme();
@@ -12,40 +14,44 @@ function Support() {
       <Container maxWidth="xl" sx={classes.container}>
         {[1, 2, 3].map((i) => (
           <Box component="section">
-            <Box>
-              <Typography component="h6" sx={{ color: colors.lightGreen }}>
-                — We provide more than
-              </Typography>
-              <Typography
-                sx={{ fontSize: 30, color: "whitesmoke", fontWeight: "bold" }}
-              >
-                Support for people and stuff...
-              </Typography>
-              <Box component="section" sx={{ p: 3 }}>
-                {[
-                  "PF monthly filings",
-                  "ESI monthly filings",
-                  "Payroll structuring",
-                  "TDS Computations",
-                  "Staffing & book keeping team",
-                ].map((s, i) => (
-                  <Typography
-                    key={i}
-                    sx={{ py: 1, fontSize: 18, color: colors.dimText }}
-                  >
-                    {s}
-                  </Typography>
-                ))}
+            <Fade left>
+              <Box>
+                <Typography component="h6" sx={{ color: colors.lightGreen }}>
+                  — We provide more than
+                </Typography>
+                <Typography
+                  sx={{ fontSize: 30, color: "whitesmoke", fontWeight: "bold" }}
+                >
+                  Support for people and stuff...
+                </Typography>
+                <Box component="section" sx={{ p: 3 }}>
+                  {[
+                    "PF monthly filings",
+                    "ESI monthly filings",
+                    "Payroll structuring",
+                    "TDS Computations",
+                    "Staffing & book keeping team",
+                  ].map((s, i) => (
+                    <Typography
+                      key={i}
+                      sx={{ py: 1, fontSize: 18, color: colors.dimText }}
+                    >
+                      {s}
+                    </Typography>
+                  ))}
+                </Box>
               </Box>
-            </Box>
+            </Fade>
 
             <Box sx={classes.serviceCard}>
-              <Box
-                sx={{
-                  backgroundColor: colors.blurCard,
-                  transform: "rotate(7.5deg)",
-                }}
-              />
+              <Reveal effect="rotateFromRight" duration={1000}>
+                <Box
+                  sx={{
+                    backgroundColor: colors.blurCard,
+                    transform: "rotate(7.5deg)",
+                  }}
+                />
+              </Reveal>
               <Box
                 sx={{
                   backgroundColor: colors.dimCard,

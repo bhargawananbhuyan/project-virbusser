@@ -1,6 +1,9 @@
 import { Container, Typography, useTheme } from "@mui/material";
 import { Box } from "@mui/system";
 import colors from "../utils/myColors";
+import Fade from "react-reveal/Fade";
+import { Slide as MatFade } from "@mui/material";
+import { useLayoutEffect, useRef, useState } from "react";
 
 const moreOfs = [
   { title: "Process standardization", imageId: "02" },
@@ -23,17 +26,30 @@ function MoreLess() {
 
   const classes = useStyles(theme);
 
+  let [animMore, setAnimMore] = useState(false);
+  let [animLess, setAnimLess] = useState(false);
+
+  const moreOfRef = useRef();
+  useLayoutEffect(() => {
+    document.addEventListener("scroll", () => {
+      const moreTopPos = moreOfRef.current?.getBoundingClientRect().top;
+      if (moreTopPos < 650) setAnimMore(true);
+    });
+  }, []);
+
   return (
     <Box sx={classes.root}>
-      <Container maxWidth="xl">
-        <Typography component="h2">What we do?</Typography>
+      <Container maxWidth="xl" ref={moreOfRef}>
+        <Fade bottom>
+          <Typography component="h2">What we do?</Typography>
+        </Fade>
       </Container>
 
       {/* more of grid */}
       <Box sx={classes.moloGridContainer}>
         <Box sx={classes.moreOfText}>
           <Typography paragraph sx={{ color: colors.lightGreen }}>
-            more of
+            <Fade top>more of</Fade>
           </Typography>
         </Box>
         <Box
@@ -45,25 +61,36 @@ function MoreLess() {
         >
           <Box sx={{ left: 0, bottom: 100 }}>
             {moreOfs.map((mf, i) => (
-              <Box
-                component="section"
-                key={i}
-                sx={{ ...classes.moloCard, "&:last-child": { mr: 3 } }}
+              <MatFade
+                in={animMore}
+                direction="up"
+                timeout={(1000 * (i + 1)) / 3}
               >
-                <div>
-                  <Typography paragraph>{mf.title}</Typography>
-                  <img
-                    src={`/assets/Virbusser website-${mf.imageId}.png`}
-                    alt={mf.title.toLowerCase()}
-                  />
-                </div>
-              </Box>
+                <Box
+                  component="section"
+                  key={i}
+                  sx={{
+                    ...classes.moloCard,
+                    "&:last-child": { mr: 3 },
+                  }}
+                >
+                  <div>
+                    <Typography paragraph>{mf.title}</Typography>
+                    <img
+                      src={`/assets/Virbusser website-${mf.imageId}.png`}
+                      alt={mf.title.toLowerCase()}
+                    />
+                  </div>
+                </Box>
+              </MatFade>
             ))}
           </Box>
         </Box>
 
         <Box sx={classes.lessOfText}>
-          <Typography paragraph>less of</Typography>
+          <Typography paragraph>
+            <Fade top>less of</Fade>
+          </Typography>
         </Box>
         <Box
           sx={{
@@ -75,19 +102,25 @@ function MoreLess() {
         >
           <Box sx={{ right: 0, bottom: 100 }}>
             {lessOfs.map((lf, i) => (
-              <Box
-                component="section"
-                key={i}
-                sx={{ ...classes.moloCard, "&:last-child": { ml: 3 } }}
+              <MatFade
+                in={animMore}
+                direction="up"
+                timeout={(1000 * (i + 1)) / 3}
               >
-                <div style={{ textAlign: "left", alignItems: "flex-end" }}>
-                  <Typography paragraph>{lf.title}</Typography>
-                  <img
-                    src={`/assets/Virbusser website-${lf.imageId}.png`}
-                    alt={lf.title.toLowerCase()}
-                  />
-                </div>
-              </Box>
+                <Box
+                  component="section"
+                  key={i}
+                  sx={{ ...classes.moloCard, "&:last-child": { ml: 3 } }}
+                >
+                  <div style={{ textAlign: "left", alignItems: "flex-end" }}>
+                    <Typography paragraph>{lf.title}</Typography>
+                    <img
+                      src={`/assets/Virbusser website-${lf.imageId}.png`}
+                      alt={lf.title.toLowerCase()}
+                    />
+                  </div>
+                </Box>
+              </MatFade>
             ))}
           </Box>
         </Box>

@@ -1,6 +1,8 @@
 import { Button, Container, Typography, useTheme } from "@mui/material";
 import { Box } from "@mui/system";
 import colors from "../utils/myColors";
+import Fade from "react-reveal/Fade";
+import Reveal from "react-reveal/Reveal";
 
 function Landing() {
   const theme = useTheme();
@@ -10,29 +12,33 @@ function Landing() {
   return (
     <Box sx={classes.root}>
       <Container maxWidth="xl" sx={classes.content}>
-        <Box sx={classes.introText}>
-          <Typography component="h5">
-            One Stop Solution for all your CFO needs
-          </Typography>
-          <Typography component="section">
-            Enabling entrepreneurs to focus on business, leave finance support
-            functions to trained professionals.
-          </Typography>
-          <Button variant="contained">Get started</Button>
-        </Box>
+        <Fade bottom>
+          <Box sx={classes.introText}>
+            <Typography component="h5">
+              One Stop Solution for all your CFO needs
+            </Typography>
+            <Typography component="section">
+              Enabling entrepreneurs to focus on business, leave finance support
+              functions to trained professionals.
+            </Typography>
+            <Button variant="contained">Get started</Button>
+          </Box>
+        </Fade>
 
-        <Box
-          sx={{
-            maxWidth: 600,
-            width: "100%",
-            p: 5,
-            [theme.breakpoints.down("md")]: {
-              maxWidth: 300,
-            },
-          }}
-        >
-          <img src={"/assets/vbs-pic.svg"} width="100%" alt="" />
-        </Box>
+        <Reveal effect="zoomBigToSmall">
+          <Box
+            sx={{
+              maxWidth: 600,
+              width: "100%",
+              p: 5,
+              [theme.breakpoints.down("md")]: {
+                maxWidth: 300,
+              },
+            }}
+          >
+            <img src={"/assets/vbs-pic.svg"} width="100%" alt="" />
+          </Box>
+        </Reveal>
       </Container>
     </Box>
   );
@@ -59,7 +65,7 @@ const useStyles = (theme) => ({
   introText: {
     maxWidth: 500,
     width: "100%",
-    p: 5,
+    // p: 5,
     "& h5": {
       fontSize: 42,
       color: "whitesmoke",

@@ -1,91 +1,116 @@
 import { Container, Typography, useTheme } from "@mui/material";
 import { Box } from "@mui/system";
 import colors from "../utils/myColors";
+import Fade from "react-reveal/Fade";
+import { useEffect, useState } from "react";
 
 function Services() {
   const theme = useTheme();
   const classes = useStyles(theme);
+
+  let [animDisplay, setAnimDisplay] = useState(false);
+
+  useEffect(() => {
+    document.addEventListener("scroll", () => {
+      setAnimDisplay(true);
+      // : setAnimDisplay(false);
+    });
+  }, []);
 
   return (
     <Box>
       <Box sx={{ display: "flex", placeContent: "center" }}>
         <Box sx={classes.clientGridContainer}>
           {[1, 2, 3, 4].map((i) => (
-            <Box key={i} sx={classes.clientGridElement}>
-              <Typography component="div">
-                <span>25+</span>
-                <span>clients</span>
-              </Typography>
-            </Box>
+            <Fade
+              key={i}
+              bottom
+              when={animDisplay}
+              duration={parseInt(`${i}000`) / 3}
+            >
+              <Box sx={classes.clientGridElement}>
+                <Typography component="div">
+                  <span>25+</span>
+                  <span>clients</span>
+                </Typography>
+              </Box>
+            </Fade>
           ))}
         </Box>
       </Box>
 
       <Container maxWidth="xl" sx={classes.allServicesContainer}>
-        <Typography component="h2">Our Services</Typography>
+        <Fade bottom>
+          <Typography component="h2">Our Services</Typography>
+        </Fade>
 
         <Box sx={classes.allServicesContent}>
           <Box sx={classes.serviceGridContainer}>
-            <Box sx={classes.serviceGridElement}>
-              <Box component="section">
-                <div>
-                  <img src={`/assets/Virbusser website-${17}.png`} alt="" />
-                </div>
-                <Typography paragraph>Budgeting & forecasting</Typography>
+            <Fade bottom cascade>
+              <Box component="div" sx={classes.serviceGridElement}>
+                <Box component="section">
+                  <div>
+                    <img src={`/assets/Virbusser website-${17}.png`} alt="" />
+                  </div>
+                  <Typography paragraph>Budgeting & forecasting</Typography>
+                </Box>
               </Box>
-            </Box>
-            <Box sx={classes.serviceGridElement}>
-              <Box component="section">
-                <div>
-                  <img src={`/assets/Virbusser website-${18}.png`} alt="" />
-                </div>
-                <Typography paragraph>Reporting & MIS</Typography>
+
+              <Box sx={classes.serviceGridElement}>
+                <Box component="section">
+                  <div>
+                    <img src={`/assets/Virbusser website-${18}.png`} alt="" />
+                  </div>
+                  <Typography paragraph>Reporting & MIS</Typography>
+                </Box>
               </Box>
-            </Box>
-            <Box sx={classes.serviceGridElement}>
-              <Box component="section">
-                <div>
-                  <img src={`/assets/Virbusser website-${20}.png`} alt="" />
-                </div>
-                <Typography paragraph>
-                  Fund raising & Capital structuring
-                </Typography>
+              <Box sx={classes.serviceGridElement}>
+                <Box component="section">
+                  <div>
+                    <img src={`/assets/Virbusser website-${20}.png`} alt="" />
+                  </div>
+                  <Typography paragraph>
+                    Fund raising & Capital structuring
+                  </Typography>
+                </Box>
               </Box>
-            </Box>
-            <Box sx={classes.serviceGridElement}>
-              <Box component="section">
-                <div>
-                  <img src={`/assets/Virbusser website-${19}.png`} alt="" />
-                </div>
-                <Typography paragraph>Statutory Compliance</Typography>
+              <Box sx={classes.serviceGridElement}>
+                <Box component="section">
+                  <div>
+                    <img src={`/assets/Virbusser website-${19}.png`} alt="" />
+                  </div>
+                  <Typography paragraph>Statutory Compliance</Typography>
+                </Box>
               </Box>
-            </Box>
-            <Box sx={classes.serviceGridElement}>
-              <Box component="section">
-                <div>
-                  <img src={`/assets/Virbusser website-${21}.png`} alt="" />
-                </div>
-                <Typography paragraph>Controls & Internal Audit</Typography>
+              <Box sx={classes.serviceGridElement}>
+                <Box component="section">
+                  <div>
+                    <img src={`/assets/Virbusser website-${21}.png`} alt="" />
+                  </div>
+                  <Typography paragraph>Controls & Internal Audit</Typography>
+                </Box>
               </Box>
-            </Box>
-            <Box sx={classes.serviceGridElement}>
-              <Box component="section">
-                <div>
-                  <img src={`/assets/Virbusser website-${22}.png`} alt="" />
-                </div>
-                <Typography paragraph>Book Reviews</Typography>
+              <Box sx={classes.serviceGridElement}>
+                <Box component="section">
+                  <div>
+                    <img src={`/assets/Virbusser website-${22}.png`} alt="" />
+                  </div>
+                  <Typography paragraph>Book Reviews</Typography>
+                </Box>
               </Box>
-            </Box>
+            </Fade>
           </Box>
 
-          <Box sx={classes.budgetingContainer}>
-            <Typography component="h4" s>
-              Budgeting & forecasting
-            </Typography>
-            {[1, 2, 3, 4].map((i) => (
-              <Typography paragraph key={i}>{`Point ${i}`}</Typography>
-            ))}
-          </Box>
+          <Fade right>
+            <Box sx={classes.budgetingContainer}>
+              <Typography component="h4" s>
+                Budgeting & forecasting
+              </Typography>
+              {[1, 2, 3, 4].map((i) => (
+                <Typography paragraph key={i}>{`Point ${i}`}</Typography>
+              ))}
+            </Box>
+          </Fade>
         </Box>
       </Container>
     </Box>
@@ -174,6 +199,19 @@ const useStyles = (theme) => ({
     placeContent: "center",
     rowGap: 3,
     columnGap: 3,
+
+    "& div": {
+      "&:nth-child(2)": { mt: 5 },
+      "&:nth-child(5)": { mt: -5 },
+      "&:nth-child(3)": { mt: 10 },
+      "&:nth-child(4)": { mt: -10 },
+      [theme.breakpoints.down("lg")]: {
+        "&:nth-child(2)": { mt: 0 },
+        "&:nth-child(5)": { mt: 0 },
+        "&:nth-child(3)": { mt: 0 },
+        "&:nth-child(4)": { mt: 0 },
+      },
+    },
   },
   serviceGridElement: {
     cursor: "pointer",
@@ -181,10 +219,6 @@ const useStyles = (theme) => ({
     width: 250,
     backgroundColor: colors.darkTile,
     borderRadius: 3,
-    "&:nth-child(2)": { mt: 5 },
-    "&:nth-child(5)": { mt: -5 },
-    "&:nth-child(3)": { mt: 10 },
-    "&:nth-child(4)": { mt: -10 },
     "&:hover": {
       backgroundColor: colors.lightGreen,
       boxShadow: "5px 5px 51px 10px rgba(81,196,137,0.74)",
@@ -200,10 +234,6 @@ const useStyles = (theme) => ({
       mt: 0,
       width: 300,
       height: 300,
-      "&:nth-child(2)": { mt: 0 },
-      "&:nth-child(5)": { mt: 0 },
-      "&:nth-child(3)": { mt: 0 },
-      "&:nth-child(4)": { mt: 0 },
     },
 
     display: "flex",
