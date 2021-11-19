@@ -30,10 +30,8 @@ function Landing() {
             sx={{
               maxWidth: 600,
               width: "100%",
-              p: 5,
-              [theme.breakpoints.down("md")]: {
-                maxWidth: 300,
-              },
+              [theme.breakpoints.down("md")]: { maxWidth: 300 },
+              [theme.breakpoints.between("md", "lg")]: { maxWidth: 500 },
             }}
           >
             <img src={"/assets/vbs-pic.svg"} width="100%" alt="" />
@@ -65,7 +63,6 @@ const useStyles = (theme) => ({
   introText: {
     maxWidth: 500,
     width: "100%",
-    // p: 5,
     "& h5": {
       fontSize: 42,
       color: "whitesmoke",
@@ -91,6 +88,12 @@ const useStyles = (theme) => ({
     [theme.breakpoints.down("md")]: {
       "& h5": { fontSize: 30 },
       "& section": { fontSize: 18 },
+      "& button": { fontSize: 16 },
+      mt: 7.5,
+    },
+    [theme.breakpoints.between("md", "lg")]: {
+      "& h5": { fontSize: 27 },
+      "& section": { fontSize: 20 },
       "& button": { fontSize: 16 },
     },
   },
