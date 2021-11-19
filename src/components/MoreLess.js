@@ -26,20 +26,21 @@ function MoreLess() {
 
   const classes = useStyles(theme);
 
-  let [animMore, setAnimMore] = useState(false);
-  let [animLess, setAnimLess] = useState(false);
+  let [wwdAnimation, setWwdAnimation] = useState(false);
 
-  const moreOfRef = useRef();
+  const wwdRef = useRef();
   useLayoutEffect(() => {
     document.addEventListener("scroll", () => {
-      const moreTopPos = moreOfRef.current?.getBoundingClientRect().top;
-      if (moreTopPos < 650) setAnimMore(true);
+      const wwdTopPos = wwdRef.current?.getBoundingClientRect().top;
+      if (wwdTopPos < 650) setWwdAnimation(true);
     });
+
+    return () => document.removeEventListener("scroll", () => {});
   }, []);
 
   return (
     <Box sx={classes.root}>
-      <Container maxWidth="xl" ref={moreOfRef}>
+      <Container maxWidth="xl" ref={wwdRef}>
         <Fade bottom>
           <Typography component="h2">What we do?</Typography>
         </Fade>
@@ -62,7 +63,7 @@ function MoreLess() {
           <Box sx={{ left: 0, bottom: 100 }}>
             {moreOfs.map((mf, i) => (
               <MatFade
-                in={animMore}
+                in={wwdAnimation}
                 direction="up"
                 timeout={(1000 * (i + 1)) / 3}
               >
@@ -103,7 +104,7 @@ function MoreLess() {
           <Box sx={{ right: 0, bottom: 100 }}>
             {lessOfs.map((lf, i) => (
               <MatFade
-                in={animMore}
+                in={wwdAnimation}
                 direction="up"
                 timeout={(1000 * (i + 1)) / 3}
               >

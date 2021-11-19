@@ -2,7 +2,6 @@ import { AccountBalanceOutlined } from "@mui/icons-material";
 import { Button, Container, Typography, useTheme } from "@mui/material";
 import { Box } from "@mui/system";
 import colors from "../utils/myColors";
-import Fade from "react-reveal/Fade";
 
 function TypeGrid() {
   const theme = useTheme();
