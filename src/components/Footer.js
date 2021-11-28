@@ -1,4 +1,4 @@
-import { Container, Icon, Typography, useTheme } from "@mui/material";
+import { Container, Typography, useTheme } from "@mui/material";
 import { Box } from "@mui/system";
 import colors from "../utils/myColors";
 import Fade from "react-reveal/Fade";
@@ -85,7 +85,6 @@ const useStyles = (theme) => ({
     alignItems: "center",
     justifyContent: "center",
     "& a": {
-      display: "block",
       backgroundColor: colors.bgPrimary,
       borderRadius: 3,
       height: 75,
