@@ -182,6 +182,7 @@ const useStyles = (theme) => ({
     width: 250,
     backgroundColor: colors.bgPrimary,
     borderRadius: 3,
+    position: "relative",
 
     [theme.breakpoints.down("md")]: {
       height: 200,
@@ -215,6 +216,25 @@ const useStyles = (theme) => ({
         height: 60,
         width: 60,
       },
+    },
+
+    cursor: "pointer",
+    overflow: "hidden",
+    "&:after": {
+      content: "''",
+      position: "absolute",
+      bottom: "-50%",
+      left: "-50%",
+      width: 0,
+      height: "250%",
+      backgroundColor: "rgba(255,255,255,.35)",
+      transition: "none",
+      transform: "rotate(45deg)",
+    },
+    "&:hover:after": {
+      backgroundColor: "rgba(255,255,255,0)",
+      width: "250%",
+      transition: "all .5s ease-in-out",
     },
   },
 

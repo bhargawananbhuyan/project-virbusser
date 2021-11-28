@@ -1,6 +1,13 @@
-import { Typography, useTheme } from "@mui/material";
+import { Container, Icon, Typography, useTheme } from "@mui/material";
 import { Box } from "@mui/system";
 import colors from "../utils/myColors";
+import Fade from "react-reveal/Fade";
+import {
+  FacebookOutlined,
+  Instagram,
+  LinkedIn,
+  Twitter,
+} from "@mui/icons-material";
 
 function Footer() {
   const theme = useTheme();
@@ -9,23 +16,39 @@ function Footer() {
 
   return (
     <Box component="footer" sx={classes.root}>
-      <Typography sx={classes.logo}>
-        {"VirBusSer".split("").map((i, index) => (
-          <span
-            style={{
-              color: index % 3 === 0 ? colors.paleYellow : colors.lightGreen,
-            }}
-          >
-            {i}
-          </span>
-        ))}
-      </Typography>
+      <Container maxWidth="xl" sx={classes.container}>
+        <Fade left>
+          <Typography sx={classes.logo}>
+            {"VirBusSer".split("").map((i, index) => (
+              <span
+                style={{
+                  color:
+                    index % 3 === 0 ? colors.paleYellow : colors.lightGreen,
+                }}
+              >
+                {i}
+              </span>
+            ))}
+          </Typography>
+        </Fade>
 
-      <Box sx={classes.itemsContainer}>
-        {[1, 2, 3, 4].map((i) => (
-          <Box />
-        ))}
-      </Box>
+        <Fade right>
+          <Box sx={classes.itemsContainer}>
+            <a href="/">
+              <FacebookOutlined />
+            </a>
+            <a href="/">
+              <Twitter />
+            </a>
+            <a href="/">
+              <Instagram />
+            </a>
+            <a href="/">
+              <LinkedIn />
+            </a>
+          </Box>
+        </Fade>
+      </Container>
     </Box>
   );
 }
@@ -33,8 +56,11 @@ function Footer() {
 const useStyles = (theme) => ({
   root: {
     backgroundColor: colors.bgLanding,
+  },
+
+  container: {
     display: "flex",
-    justifyContent: "space-around",
+    justifyContent: "space-between",
     py: 5,
     px: 3,
     alignItems: "center",
@@ -58,17 +84,33 @@ const useStyles = (theme) => ({
     flexWrap: "wrap",
     alignItems: "center",
     justifyContent: "center",
-    "& div": {
+    "& a": {
+      display: "block",
       backgroundColor: colors.bgPrimary,
       borderRadius: 3,
-      height: 125,
-      width: 125,
+      height: 75,
+      width: 75,
       mx: 1,
       [theme.breakpoints.down("lg")]: {
         mt: 5,
       },
       [theme.breakpoints.down("md")]: {
         mt: 2,
+      },
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      color: colors.paleYellow,
+
+      "& svg": {
+        fontSize: 35,
+        [theme.breakpoints.down("sm")]: {
+          fontSize: 27,
+        },
+      },
+      [theme.breakpoints.down("sm")]: {
+        height: 50,
+        width: 50,
       },
     },
   },

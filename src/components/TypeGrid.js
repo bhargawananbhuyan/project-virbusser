@@ -2,6 +2,8 @@ import { AccountBalanceOutlined } from "@mui/icons-material";
 import { Button, Container, Typography, useTheme } from "@mui/material";
 import { Box } from "@mui/system";
 import colors from "../utils/myColors";
+import Fade from "react-reveal/Fade";
+import Reveal from "react-reveal/Pulse";
 
 function TypeGrid() {
   const theme = useTheme();
@@ -104,13 +106,44 @@ function TypeGrid() {
         {/* end of why virbusser */}
 
         {/* get in touch */}
-        <Box sx={classes.getInTouch}>
-          <Typography component="section">
-            <h4>Get in touch with us</h4>
-            <div>For more details get in touch with us</div>
-          </Typography>
-          <Button variant="contained">Contact</Button>
-        </Box>
+        <Reveal>
+          <Box
+            sx={{
+              ...classes.getInTouch,
+              position: "relative",
+              "&:after": {
+                content: "''",
+                width: "100%",
+                height: "100%",
+                position: "absolute",
+                border: `100px solid ${colors.bgPrimary}`,
+                borderRadius: 30,
+              },
+            }}
+          >
+            <Fade bottom>
+              <Typography component="section">
+                <h4>Get in touch with us</h4>
+                <div>For more details get in touch with us</div>
+              </Typography>
+              <Button variant="contained">Contact</Button>
+            </Fade>
+            <img
+              src={"/assets/Virbusser website-37.png"}
+              height={250}
+              width="auto"
+              alt=""
+              style={{ position: "absolute", top: -50, left: -50 }}
+            />
+            <img
+              src={"/assets/Virbusser website-39.png"}
+              height={250}
+              width="auto"
+              alt=""
+              style={{ position: "absolute", bottom: -75, right: -85 }}
+            />
+          </Box>
+        </Reveal>
 
         {/* esteemed clients */}
         <Box sx={classes.clientsContainer}>
@@ -185,8 +218,8 @@ const useStyles = (theme) => ({
     flexWrap: "wrap",
     alignItems: "center",
     justifyContent: "center",
-    rowGap: 3,
-    columnGap: 3,
+    rowGap: 7.5,
+    columnGap: 7.5,
     "& div": {
       width: 500,
       minHeight: 300,
@@ -197,6 +230,19 @@ const useStyles = (theme) => ({
       alignItems: "flex-end",
       [theme.breakpoints.down("md")]: { width: 300, height: 275 },
       cursor: "pointer",
+      backgroundSize: "cover",
+      "&:nth-child(1)": {
+        backgroundImage: "url('/assets/pexels-sora-shimazaki-5673488.jpg')",
+      },
+      "&:nth-child(2)": {
+        backgroundImage: "url('/assets/planning.jpg')",
+      },
+      "&:nth-child(3)": {
+        backgroundImage: "url('/assets/pexels-pixabay-326576.jpg')",
+      },
+      "&:nth-child(4)": {
+        backgroundImage: "url('/assets/pexels-andrea-piacquadio-3769021.jpg')",
+      },
 
       "& p": {
         width: "80%",
@@ -207,31 +253,21 @@ const useStyles = (theme) => ({
       },
       "&:hover": {
         boxShadow: "inset 0px 0px 100px 125px rgba(0, 0, 0, 0.5)",
-        transition: ".2s ease",
-      },
-      "&:nth-child(1):hover": {
-        backgroundImage: "url('/assets/pexels-sora-shimazaki-5673488.jpg')",
-        backgroundSize: "cover",
-      },
-      "&:nth-child(2):hover": {
-        backgroundImage: "url('/assets/planning.jpg')",
-        backgroundSize: "cover",
-      },
-      "&:nth-child(3):hover": {
-        backgroundImage: "url('/assets/pexels-pixabay-326576.jpg')",
-        backgroundSize: "cover",
-      },
-      "&:nth-child(4):hover": {
-        backgroundImage: "url('/assets/pexels-andrea-piacquadio-3769021.jpg')",
-        backgroundSize: "cover",
+        transition: ".25s ease",
+        transform: "scale(1.05)",
+
+        "& p": {
+          transform: "translateY(-1rem)",
+          transition: ".25s ease",
+        },
       },
     },
   },
 
   typesGridContainer: {
     mb: 20,
-    columnGap: 3,
-    rowGap: 3,
+    columnGap: 5,
+    rowGap: 5,
     display: "flex",
     flexWrap: "wrap",
     alignItems: "center",
@@ -244,33 +280,39 @@ const useStyles = (theme) => ({
       fontWeight: "bold",
       fontSize: 20,
       color: "whitesmoke",
-      minHeight: 300,
-      width: 300,
+      height: 300,
+      width: 500,
       flexGrow: 1,
       position: "relative",
-      "& h4": { width: 225, fontSize: 22.5, fontWeight: "bold" },
+      "& h4": { width: 225, fontSize: 22.5, fontWeight: "bold", mt: 3.5 },
       "& p": {
-        mt: 3.5,
-        fontSize: 18,
-        width: 275,
-        color: colors.dimText,
+        mt: 2,
+        fontSize: 20,
+        width: 400,
+        color: "rgb(100,100,100)",
         fontWeight: 400,
         lineHeight: 1.8,
       },
       "& img": {
-        width: 150,
+        width: 185,
         height: "auto",
         position: "absolute",
         bottom: 0,
         right: 5,
       },
 
-      "&:nth-child(2)": { "& img": { width: 300, right: -10 } },
-      "&:nth-child(3)": { "& img": { width: 300, top: 0, right: 0 } },
-      "&:nth-child(4)": { "& img": { width: "100%", bottom: 0, left: 0 } },
+      "&:nth-child(2)": { "& img": { width: 375, right: -40 } },
+      "&:nth-child(3)": {
+        "& img": { width: 300, top: 0, right: 0 },
+      },
+      "&:nth-child(4)": {
+        "& img": { width: "100%", bottom: 0, left: 0 },
+        "& p": { width: 450 },
+      },
       "&:nth-child(5)": {
         "& img": { width: 200, bottom: 20, right: 20 },
-        "& p": { width: 350 },
+        "& p": { width: "50%" },
+        flexGrow: 1,
       },
 
       [theme.breakpoints.down("sm")]: {
@@ -280,6 +322,13 @@ const useStyles = (theme) => ({
         "&:nth-child(2)": { "& img": { width: 300, right: -25 } },
         "&:nth-child(5)": {
           "& img": { width: 125, bottom: 5, right: 5 },
+          "& p": { width: 200 },
+        },
+        "&:nth-child(3)": {
+          pb: 7.5,
+        },
+        "&:nth-child(4)": {
+          "& img": { width: "100%", bottom: 0, left: 0 },
           "& p": { width: 200 },
         },
       },
@@ -295,6 +344,7 @@ const useStyles = (theme) => ({
     justifyContent: "center",
     backgroundColor: "#3e3f42",
     borderRadius: 4.5,
+    textAlign: "center",
     mt: 16,
     "& section": {
       "& h4": {

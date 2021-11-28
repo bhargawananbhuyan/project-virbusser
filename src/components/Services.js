@@ -2,20 +2,33 @@ import { Container, Typography, useTheme } from "@mui/material";
 import { Box } from "@mui/system";
 import colors from "../utils/myColors";
 import Fade from "react-reveal/Fade";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
+import CountUp from "react-countup";
+import ServiceElem from "./ServiceElem";
 
 function Services() {
   const theme = useTheme();
   const classes = useStyles(theme);
 
   let [animDisplay, setAnimDisplay] = useState(false);
+  const clientsRef = useRef();
+  let [clientDisplay, setClientDisplay] = useState(false);
 
   useEffect(() => {
     document.addEventListener("scroll", () => {
       setAnimDisplay(true);
-      // : setAnimDisplay(false);
+
+      const top = clientsRef.current?.getBoundingClientRect().top;
+      if (window.scrollY >= top - 350) {
+        setClientDisplay(true);
+      }
     });
   }, []);
+
+  let [serviceData, setServiceData] = useState({
+    title: "Budgeting & Forecasting",
+    points: ["Point 1", "Point 2", "Point 3", "Point 4"],
+  });
 
   return (
     <Box>
@@ -30,11 +43,64 @@ function Services() {
             >
               <Box sx={classes.clientGridElement}>
                 <Typography component="div">
-                  <span>25+</span>
-                  <span>clients</span>
+                  {animDisplay ? (
+                    <>
+                      <CountUp end={25} duration={1.5} suffix="+" />
+                      <span>clients</span>
+                    </>
+                  ) : (
+                    ""
+                  )}
                 </Typography>
               </Box>
             </Fade>
+          ))}
+          <img
+            src={`/assets/Virbusser website-41.png`}
+            alt=""
+            height={175}
+            width="auto"
+            style={{ position: "absolute", bottom: -35, left: 20, zIndex: -10 }}
+          />
+          <img
+            src={`/assets/Virbusser website-41.png`}
+            alt=""
+            height={175}
+            width="auto"
+            style={{ position: "absolute", top: -35, right: 25, zIndex: -9 }}
+          />
+        </Box>
+
+        <Box ref={clientsRef} sx={classes.clientGridSm}>
+          {[1, 2, 3, 4].map((i) => (
+            <Box
+              sx={{
+                padding: 5,
+                color: "whitesmoke",
+                textAlign: "center",
+              }}
+            >
+              <Typography
+                component="div"
+                sx={{
+                  "& span:nth-child(1)": {
+                    fontSize: 32,
+                    fontWeight: "bold",
+                    color: colors.lightGreen,
+                  },
+                  fontSize: 18,
+                }}
+              >
+                {clientDisplay ? (
+                  <Fade bottom>
+                    <CountUp end={25} duration={1.5} suffix="+" />
+                    <span>clients</span>
+                  </Fade>
+                ) : (
+                  ""
+                )}
+              </Typography>
+            </Box>
           ))}
         </Box>
       </Box>
@@ -46,68 +112,99 @@ function Services() {
 
         <Box sx={classes.allServicesContent}>
           <Box sx={classes.serviceGridContainer}>
-            <Fade bottom cascade>
-              <Box component="div" sx={classes.serviceGridElement}>
-                <Box component="section">
-                  <div>
-                    <img src={`/assets/Virbusser website-${17}.png`} alt="" />
-                  </div>
-                  <Typography paragraph>Budgeting & forecasting</Typography>
-                </Box>
-              </Box>
-
-              <Box sx={classes.serviceGridElement}>
-                <Box component="section">
-                  <div>
-                    <img src={`/assets/Virbusser website-${18}.png`} alt="" />
-                  </div>
-                  <Typography paragraph>Reporting & MIS</Typography>
-                </Box>
-              </Box>
-              <Box sx={classes.serviceGridElement}>
-                <Box component="section">
-                  <div>
-                    <img src={`/assets/Virbusser website-${20}.png`} alt="" />
-                  </div>
-                  <Typography paragraph>
-                    Fund raising & Capital structuring
-                  </Typography>
-                </Box>
-              </Box>
-              <Box sx={classes.serviceGridElement}>
-                <Box component="section">
-                  <div>
-                    <img src={`/assets/Virbusser website-${19}.png`} alt="" />
-                  </div>
-                  <Typography paragraph>Statutory Compliance</Typography>
-                </Box>
-              </Box>
-              <Box sx={classes.serviceGridElement}>
-                <Box component="section">
-                  <div>
-                    <img src={`/assets/Virbusser website-${21}.png`} alt="" />
-                  </div>
-                  <Typography paragraph>Controls & Internal Audit</Typography>
-                </Box>
-              </Box>
-              <Box sx={classes.serviceGridElement}>
-                <Box component="section">
-                  <div>
-                    <img src={`/assets/Virbusser website-${22}.png`} alt="" />
-                  </div>
-                  <Typography paragraph>Book Reviews</Typography>
-                </Box>
-              </Box>
-            </Fade>
+            <ServiceElem
+              title={"Budgeting & forecasting"}
+              img={17}
+              hImg={25}
+              handleClick={() =>
+                setServiceData({
+                  title: "Budgeting & Forecasting",
+                  points: ["Point 1", "Point 2", "Point 3", "Point 4"],
+                })
+              }
+            />
+            <ServiceElem
+              title={"Reporting & MIS"}
+              img={18}
+              hImg={26}
+              handleClick={() =>
+                setServiceData({
+                  title: "Reporting & MIS",
+                  points: ["Point 1", "Point 2", "Point 3", "Point 4"],
+                })
+              }
+            />
+            <ServiceElem
+              title={"Fund raising & Capital structuring"}
+              img={20}
+              hImg={28}
+              handleClick={() =>
+                setServiceData({
+                  title: "Fund raising & Capital structuring",
+                  points: ["Point 1", "Point 2", "Point 3", "Point 4"],
+                })
+              }
+            />
+            <ServiceElem
+              title={"Statutory Compliance"}
+              img={19}
+              hImg={27}
+              handleClick={() =>
+                setServiceData({
+                  title: "Statutory Compliance",
+                  points: ["Point 1", "Point 2", "Point 3", "Point 4"],
+                })
+              }
+            />
+            <ServiceElem
+              title={"Controls & Internal Audit"}
+              img={21}
+              hImg={23}
+              handleClick={() =>
+                setServiceData({
+                  title: "Controls & Internal Audit",
+                  points: ["Point 1", "Point 2", "Point 3", "Point 4"],
+                })
+              }
+            />
+            <ServiceElem
+              title={"Book Reviews"}
+              img={22}
+              hImg={24}
+              handleClick={() =>
+                setServiceData({
+                  title: "Book Reviews",
+                  points: ["Point 1", "Point 2", "Point 3", "Point 4"],
+                })
+              }
+            />
           </Box>
 
           <Fade right>
             <Box sx={classes.budgetingContainer}>
-              <Typography component="h4" s>
-                Budgeting & forecasting
-              </Typography>
-              {[1, 2, 3, 4].map((i) => (
-                <Typography paragraph key={i}>{`Point ${i}`}</Typography>
+              <Box
+                sx={{
+                  position: "relative",
+                  "& img": {
+                    position: "absolute",
+                    top: -25,
+                    left: -50,
+                    zIndex: -10,
+                  },
+                }}
+              >
+                <Typography component="h4">{serviceData.title}</Typography>
+                <img
+                  src={`/assets/Virbusser website-37.png`}
+                  alt=""
+                  height={100}
+                  width="auto"
+                />
+              </Box>
+              {serviceData.points.map((item, index) => (
+                <Typography paragraph key={index}>
+                  {item}
+                </Typography>
               ))}
             </Box>
           </Fade>
@@ -124,6 +221,14 @@ const useStyles = (theme) => ({
     flexWrap: "wrap",
     mt: -25,
     p: 3,
+    position: "relative",
+    zIndex: 10,
+    [theme.breakpoints.down("sm")]: {
+      display: "none",
+    },
+    [theme.breakpoints.between("sm", "md")]: {
+      mt: -10,
+    },
   },
   clientGridElement: {
     height: 350,
@@ -162,11 +267,11 @@ const useStyles = (theme) => ({
       fontWeight: "bold",
       color: "whitesmoke",
       mt: 15,
-      mb: 4.5,
+      mb: 7.5,
       fontSize: 55,
       [theme.breakpoints.down("md")]: {
         fontSize: 36,
-        mt: 7.5,
+        mt: 10,
         mb: 5,
         textAlign: "center",
       },
@@ -184,9 +289,11 @@ const useStyles = (theme) => ({
   allServicesContent: {
     display: "flex",
     flexDirection: "row",
+    ml: -9,
     [theme.breakpoints.down("xl")]: {
       flexDirection: "column",
       alignItems: "center",
+      ml: 0,
     },
   },
 
@@ -221,7 +328,7 @@ const useStyles = (theme) => ({
     borderRadius: 3,
     "&:hover": {
       backgroundColor: colors.lightGreen,
-      boxShadow: "5px 5px 51px 10px rgba(81,196,137,0.74)",
+      boxShadow: "1px 1px 1px -5px rgba(81,196,137,0.74)",
       "& section": {
         "& p": {
           color: "whitesmoke",
@@ -252,6 +359,7 @@ const useStyles = (theme) => ({
       "& img": {
         height: 100,
         width: 100,
+        ml: -3,
       },
 
       "& p": {
@@ -297,6 +405,19 @@ const useStyles = (theme) => ({
       [theme.breakpoints.down("sm")]: {
         fontSize: 24,
       },
+    },
+  },
+
+  clientGridSm: {
+    backgroundColor: colors.bgLanding,
+    width: "100%",
+    mx: 5,
+    borderRadius: 3,
+    mt: -10,
+    py: 2.5,
+    boxShadow: "0px 0px 10px -5px rgb(0,0,0,.5)",
+    [theme.breakpoints.up("sm")]: {
+      display: "none",
     },
   },
 });
