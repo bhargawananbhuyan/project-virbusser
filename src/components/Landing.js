@@ -10,19 +10,19 @@ function Landing() {
 
   let [xOffset, setXOffset] = useState({
     top: [
-      125, // for desktop
+      65, // for desktop
       30, // for mobile
     ],
-    mid: [-15, -20],
-    bot: [125, 45],
+    mid: [-50, -20],
+    bot: [65, 45],
   });
 
   useLayoutEffect(() => {
     document.addEventListener("scroll", () => {
       if (window.scrollY > 50) {
-        setXOffset({ top: [50, 10], mid: [-50, -30], bot: [50, 10] });
+        setXOffset({ top: [-10, 10], mid: [-100, -30], bot: [-10, 10] });
       } else {
-        setXOffset({ top: [125, 30], mid: [-15, -20], bot: [125, 45] });
+        setXOffset({ top: [65, 30], mid: [-50, -20], bot: [65, 45] });
       }
     });
   }, []);
@@ -48,7 +48,7 @@ function Landing() {
         <Reveal effect="zoomBigToSmall">
           <Box
             sx={{
-              maxWidth: 700,
+              maxWidth: 650,
               width: "100%",
               position: "relative",
 
@@ -57,7 +57,7 @@ function Landing() {
                 top: "50%",
                 left: "50%",
                 transform: "translate(-50%, -50%)",
-                width: 200,
+                width: 275,
                 [theme.breakpoints.down("md")]: {
                   width: 135,
                 },
@@ -72,7 +72,7 @@ function Landing() {
             }}
           >
             <img
-              src={"/assets/Virbusser website-39.png"}
+              src={"/assets/logo-circle.svg"}
               width="100%"
               alt=""
               className="logo-outer"
@@ -86,23 +86,23 @@ function Landing() {
             <Box sx={classes.circles}>
               {/* from left */}
               <Fade left>
-                <img src={"/assets/dark-circle.svg"} alt="" />
+                <img src={"/assets/svg-1.svg"} alt="" />
               </Fade>
               <Fade left>
-                <img src={"/assets/dark-circle.svg"} alt="" />
+                <img src={"/assets/svg-2.svg"} alt="" />
               </Fade>
               <Fade left>
-                <img src={"/assets/dark-circle.svg"} alt="" />
+                <img src={"/assets/svg-3.svg"} alt="" />
               </Fade>
               {/* from right */}
               <Fade right>
-                <img src={"/assets/dark-circle.svg"} alt="" />
+                <img src={"/assets/svg-4.svg"} alt="" />
               </Fade>
               <Fade right>
-                <img src={"/assets/dark-circle.svg"} alt="" />
+                <img src={"/assets/svg-5.svg"} alt="" />
               </Fade>
               <Fade right>
-                <img src={"/assets/dark-circle.svg"} alt="" />
+                <img src={"/assets/svg-6.svg"} alt="" />
               </Fade>
             </Box>
           </Box>
@@ -148,6 +148,7 @@ const useStyles = (theme, xOffset) => ({
       color: colors.dimText,
       mt: 4,
       mb: 6.5,
+      lineHeight: 2,
     },
     "& button": {
       backgroundColor: colors.paleYellow,
@@ -167,7 +168,7 @@ const useStyles = (theme, xOffset) => ({
 
     [theme.breakpoints.down("md")]: {
       "& h5": { fontSize: 28 },
-      "& section": { fontSize: 18 },
+      "& section": { fontSize: 18, lineHeight: 1.8 },
       "& button": { fontSize: 16 },
       mt: 7.5,
     },

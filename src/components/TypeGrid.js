@@ -3,19 +3,43 @@ import { Button, Container, Typography, useTheme } from "@mui/material";
 import { Box } from "@mui/system";
 import colors from "../utils/myColors";
 import Fade from "react-reveal/Fade";
+import Zoom from "react-reveal/Zoom";
 import Reveal from "react-reveal/Pulse";
+import { useLayoutEffect, useRef, useState } from "react";
 
 function TypeGrid() {
   const theme = useTheme();
 
-  const classes = useStyles(theme);
+  const typeRef = useRef();
+  let [scale, setScale] = useState(0);
+
+  const classes = useStyles(theme, scale);
+  useLayoutEffect(() => {
+    document.addEventListener("scroll", () => {
+      const top = typeRef.current?.getBoundingClientRect().top;
+      top < 650 ? setScale(1) : setScale(0);
+    });
+  }, []);
 
   return (
-    <Box sx={{ display: "flex", justifyContent: "center" }}>
+    <Box sx={{ display: "flex", justifyContent: "center" }} ref={typeRef}>
       <Container maxWidth="xl">
         {/* types grid */}
         <Box sx={classes.typesGridContainer}>
-          <Box>
+          <Box
+            sx={{
+              "& img:first-child": {
+                position: "absolute",
+                top: -50,
+                left: 100,
+                width: 100,
+                zIndex: -1,
+              },
+            }}
+          >
+            <Zoom>
+              <img src={"/assets/Virbusser website-37.png"} alt="" />
+            </Zoom>
             <Typography component="h4">Mobile Enablement</Typography>
             <Typography paragraph>
               Enhance your customer’s experience by creating mobile apps for
@@ -74,12 +98,28 @@ function TypeGrid() {
               alt="low cost automation"
             />
           </Box>
+
+          <Zoom>
+            <img
+              src={"/assets/Virbusser website-37.png"}
+              alt=""
+              style={{
+                position: "absolute",
+                width: 100,
+                bottom: -50,
+                left: 300,
+                zIndex: -1,
+              }}
+            />
+          </Zoom>
         </Box>
         {/* end of types grid */}
 
         {/* why virbusser grid */}
         <Box sx={classes.whyContainer}>
-          <Typography component="h5">Why Virbusser?</Typography>
+          <Fade left>
+            <Typography component="h5">Why Virbusser?</Typography>
+          </Fade>
           <Box sx={classes.whyGrid}>
             <Box>
               <Typography paragraph>
@@ -111,23 +151,26 @@ function TypeGrid() {
             sx={{
               ...classes.getInTouch,
               position: "relative",
-              "&:after": {
+              "&:before": {
                 content: "''",
                 width: "100%",
                 height: "100%",
                 position: "absolute",
                 border: `100px solid ${colors.bgPrimary}`,
                 borderRadius: 30,
+                zIndex: 10,
               },
             }}
           >
-            <Fade bottom>
-              <Typography component="section">
-                <h4>Get in touch with us</h4>
-                <div>For more details get in touch with us</div>
-              </Typography>
-              <Button variant="contained">Contact</Button>
-            </Fade>
+            <Box sx={{ position: "absolute", zIndex: 11 }}>
+              <Fade bottom>
+                <Typography component="section">
+                  <h4>Get in touch with us</h4>
+                  <div>For more details get in touch with us</div>
+                </Typography>
+                <Button variant="contained">Contact</Button>
+              </Fade>
+            </Box>
             <img
               src={"/assets/Virbusser website-37.png"}
               height={250}
@@ -147,19 +190,21 @@ function TypeGrid() {
 
         {/* esteemed clients */}
         <Box sx={classes.clientsContainer}>
-          <Typography paragraph>Esteemed Clients</Typography>
-          <Box sx={classes.clientBox}>
-            {[1, 2, 3, 4, 5, 6].map((i) => (
-              <AccountBalanceOutlined key={i} />
-            ))}
-          </Box>
+          <Fade bottom cascade>
+            <Typography paragraph>Esteemed Clients</Typography>
+            <Box sx={classes.clientBox}>
+              {[1, 2, 3, 4, 5, 6].map((i) => (
+                <AccountBalanceOutlined key={i} />
+              ))}
+            </Box>
+          </Fade>
         </Box>
       </Container>
     </Box>
   );
 }
 
-const useStyles = (theme) => ({
+const useStyles = (theme, scale) => ({
   clientsContainer: {
     mt: 16,
     mb: 16,
@@ -185,7 +230,11 @@ const useStyles = (theme) => ({
   clientBox: {
     display: "flex",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "space-between",
+    [theme.breakpoints.down("sm")]: {
+      justifyContent: "center",
+    },
+
     flexWrap: "wrap",
 
     "& svg": {
@@ -193,6 +242,9 @@ const useStyles = (theme) => ({
       color: colors.dimBg,
       mx: 3.5,
       my: 2,
+      "&:hover": {
+        color: "whitesmoke",
+      },
     },
   },
 
@@ -251,8 +303,8 @@ const useStyles = (theme) => ({
         color: "whitesmoke",
         "& span": { color: colors.dimText },
       },
+      boxShadow: "inset 0px 0px 100px 125px rgba(0, 0, 0, 0.5)",
       "&:hover": {
-        boxShadow: "inset 0px 0px 100px 125px rgba(0, 0, 0, 0.5)",
         transition: ".25s ease",
         transform: "scale(1.05)",
 
@@ -272,6 +324,7 @@ const useStyles = (theme) => ({
     flexWrap: "wrap",
     alignItems: "center",
     justifyContent: "center",
+    position: "relative",
 
     "& div": {
       borderRadius: 5,
@@ -299,6 +352,8 @@ const useStyles = (theme) => ({
         position: "absolute",
         bottom: 0,
         right: 5,
+        transform: `scale(${scale})`,
+        transition: "all 1s ease",
       },
 
       "&:nth-child(2)": { "& img": { width: 375, right: -40 } },

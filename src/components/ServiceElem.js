@@ -1,28 +1,23 @@
 import { Typography, useTheme } from "@mui/material";
 import { Box } from "@mui/system";
-import { useState } from "react";
 import colors from "../utils/myColors";
 import Fade from "react-reveal/Fade";
 
-function ServiceElem({ title, img, hImg, handleClick }) {
+function ServiceElem({ title, img, hImg, active, handleClick }) {
   const theme = useTheme();
-  const classes = useStyles(theme);
-
-  let [hovered, setHovered] = useState(false);
+  const classes = useStyles(theme, active);
 
   return (
     <Fade bottom>
       <Box
         component="div"
         sx={classes.serviceGridElement}
-        onMouseOver={() => setHovered(true)}
-        onMouseOut={() => setHovered(false)}
         onClick={handleClick}
       >
         <Box component="section">
           <div>
             <img
-              src={`/assets/Virbusser website-${hovered ? hImg : img}.png`}
+              src={`/assets/Virbusser website-${active ? hImg : img}.png`}
               alt=""
             />
           </div>
@@ -33,23 +28,16 @@ function ServiceElem({ title, img, hImg, handleClick }) {
   );
 }
 
-const useStyles = (theme) => ({
+const useStyles = (theme, active) => ({
   serviceGridElement: {
     cursor: "pointer",
     height: 250,
     width: 250,
-    backgroundColor: colors.darkTile,
+    backgroundColor: active ? colors.lightGreen : colors.darkTile,
     borderRadius: 3,
-    "&:hover": {
-      backgroundColor: colors.lightGreen,
-      boxShadow: "1px 1px 1px -5px rgba(81,196,137,0.74)",
-      "& section": {
-        "& p": {
-          color: "whitesmoke",
-        },
-      },
-      transition: ".2s ease",
-    },
+    boxShadow: active
+      ? "1px 1px 1px -5px rgba(81,196,137,0.74)"
+      : "transparent",
 
     [theme.breakpoints.down("lg")]: {
       mt: 0,
@@ -65,6 +53,7 @@ const useStyles = (theme) => ({
       p: 3.5,
       display: "flex",
       flexDirection: "column",
+      transition: ".2s ease",
 
       [theme.breakpoints.down("md")]: {
         alignItems: "flex-start",
@@ -79,7 +68,7 @@ const useStyles = (theme) => ({
       "& p": {
         fontSize: 16,
         fontWeight: "bold",
-        color: colors.dimText,
+        color: active ? "whitesmoke" : colors.dimText,
         width: 125,
         [theme.breakpoints.down("md")]: {
           width: 200,

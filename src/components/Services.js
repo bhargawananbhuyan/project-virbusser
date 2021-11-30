@@ -2,7 +2,8 @@ import { Container, Typography, useTheme } from "@mui/material";
 import { Box } from "@mui/system";
 import colors from "../utils/myColors";
 import Fade from "react-reveal/Fade";
-import { useEffect, useState, useRef } from "react";
+import Zoom from "react-reveal/Zoom";
+import { useState, useRef, useLayoutEffect } from "react";
 import CountUp from "react-countup";
 import ServiceElem from "./ServiceElem";
 
@@ -14,7 +15,9 @@ function Services() {
   const clientsRef = useRef();
   let [clientDisplay, setClientDisplay] = useState(false);
 
-  useEffect(() => {
+  let [rotateAnim, setRotateAnim] = useState(25);
+
+  useLayoutEffect(() => {
     document.addEventListener("scroll", () => {
       setAnimDisplay(true);
 
@@ -22,6 +25,8 @@ function Services() {
       if (window.scrollY >= top - 350) {
         setClientDisplay(true);
       }
+
+      window.scrollY > 50 ? setRotateAnim(-100) : setRotateAnim(25);
     });
   }, []);
 
@@ -29,6 +34,8 @@ function Services() {
     title: "Budgeting & Forecasting",
     points: ["Point 1", "Point 2", "Point 3", "Point 4"],
   });
+
+  let [active, setActive] = useState([true, false, false, false, false, false]);
 
   return (
     <Box>
@@ -41,7 +48,15 @@ function Services() {
               when={animDisplay}
               duration={parseInt(`${i}000`) / 3}
             >
-              <Box sx={classes.clientGridElement}>
+              <Box
+                sx={{
+                  ...classes.clientGridElement,
+                  borderTopLeftRadius: i === 1 ? 15 : 0,
+                  borderBottomLeftRadius: i === 1 ? 15 : 0,
+                  borderTopRightRadius: i === 4 ? 15 : 0,
+                  borderBottomRightRadius: i === 4 ? 15 : 0,
+                }}
+              >
                 <Typography component="div">
                   {animDisplay ? (
                     <>
@@ -60,14 +75,26 @@ function Services() {
             alt=""
             height={175}
             width="auto"
-            style={{ position: "absolute", bottom: -35, left: 20, zIndex: -10 }}
+            style={{
+              position: "absolute",
+              bottom: -35,
+              left: rotateAnim,
+              zIndex: -10,
+              transition: "all 1s ease",
+            }}
           />
           <img
             src={`/assets/Virbusser website-41.png`}
             alt=""
             height={175}
             width="auto"
-            style={{ position: "absolute", top: -35, right: 25, zIndex: -9 }}
+            style={{
+              position: "absolute",
+              top: -35,
+              right: rotateAnim,
+              zIndex: -9,
+              transition: "all 1s ease",
+            }}
           />
         </Box>
 
@@ -116,67 +143,79 @@ function Services() {
               title={"Budgeting & forecasting"}
               img={17}
               hImg={25}
-              handleClick={() =>
+              active={active[0]}
+              handleClick={() => {
                 setServiceData({
                   title: "Budgeting & Forecasting",
                   points: ["Point 1", "Point 2", "Point 3", "Point 4"],
-                })
-              }
+                });
+                setActive([true, false, false, false, false, false]);
+              }}
             />
             <ServiceElem
               title={"Reporting & MIS"}
               img={18}
               hImg={26}
-              handleClick={() =>
+              active={active[1]}
+              handleClick={() => {
                 setServiceData({
                   title: "Reporting & MIS",
                   points: ["Point 1", "Point 2", "Point 3", "Point 4"],
-                })
-              }
+                });
+                setActive([false, true, false, false, false, false]);
+              }}
             />
             <ServiceElem
               title={"Fund raising & Capital structuring"}
               img={20}
               hImg={28}
-              handleClick={() =>
+              active={active[2]}
+              handleClick={() => {
                 setServiceData({
                   title: "Fund raising & Capital structuring",
                   points: ["Point 1", "Point 2", "Point 3", "Point 4"],
-                })
-              }
+                });
+                setActive([false, false, true, false, false, false]);
+              }}
             />
             <ServiceElem
               title={"Statutory Compliance"}
               img={19}
               hImg={27}
-              handleClick={() =>
+              active={active[3]}
+              handleClick={() => {
                 setServiceData({
                   title: "Statutory Compliance",
                   points: ["Point 1", "Point 2", "Point 3", "Point 4"],
-                })
-              }
+                });
+                setActive([false, false, false, true, false, false]);
+              }}
             />
             <ServiceElem
               title={"Controls & Internal Audit"}
               img={21}
               hImg={23}
-              handleClick={() =>
+              active={active[4]}
+              handleClick={() => {
                 setServiceData({
                   title: "Controls & Internal Audit",
                   points: ["Point 1", "Point 2", "Point 3", "Point 4"],
-                })
-              }
+                });
+                setActive([false, false, false, false, true, false]);
+              }}
             />
             <ServiceElem
               title={"Book Reviews"}
               img={22}
               hImg={24}
-              handleClick={() =>
+              active={active[5]}
+              handleClick={() => {
                 setServiceData({
                   title: "Book Reviews",
                   points: ["Point 1", "Point 2", "Point 3", "Point 4"],
-                })
-              }
+                });
+                setActive([false, false, false, false, false, true]);
+              }}
             />
           </Box>
 
@@ -194,12 +233,14 @@ function Services() {
                 }}
               >
                 <Typography component="h4">{serviceData.title}</Typography>
-                <img
-                  src={`/assets/Virbusser website-37.png`}
-                  alt=""
-                  height={100}
-                  width="auto"
-                />
+                <Zoom>
+                  <img
+                    src={`/assets/Virbusser website-37.png`}
+                    alt=""
+                    height={100}
+                    width="auto"
+                  />
+                </Zoom>
               </Box>
               {serviceData.points.map((item, index) => (
                 <Typography paragraph key={index}>
@@ -223,6 +264,7 @@ const useStyles = (theme) => ({
     p: 3,
     position: "relative",
     zIndex: 10,
+    columnGap: 1,
     [theme.breakpoints.down("sm")]: {
       display: "none",
     },
@@ -231,16 +273,15 @@ const useStyles = (theme) => ({
     },
   },
   clientGridElement: {
-    height: 350,
-    width: 350,
+    height: 365,
+    width: 365,
     backgroundColor: colors.darkTile,
-    borderRadius: 3,
     zIndex: 10,
-    mx: 1.5,
     my: 1.5,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+
     "& div": {
       display: "flex",
       flexDirection: "column",

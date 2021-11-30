@@ -2,6 +2,7 @@ import { Container, Typography, useTheme } from "@mui/material";
 import { Box } from "@mui/system";
 import colors from "../utils/myColors";
 import Fade from "react-reveal/Fade";
+import Zoom from "react-reveal/Zoom";
 import { Slide as MatFade } from "@mui/material";
 import { useLayoutEffect, useRef, useState } from "react";
 
@@ -27,12 +28,16 @@ function MoreLess() {
   const classes = useStyles(theme);
 
   let [wwdAnimation, setWwdAnimation] = useState(false);
+  let [rotateAnim, setRotateAnim] = useState(-50);
 
   const wwdRef = useRef();
   useLayoutEffect(() => {
     document.addEventListener("scroll", () => {
       const wwdTopPos = wwdRef.current?.getBoundingClientRect().top;
-      if (wwdTopPos < 650) setWwdAnimation(true);
+      if (wwdTopPos < 650) {
+        setWwdAnimation(true);
+      }
+      wwdTopPos < 750 ? setRotateAnim(-225) : setRotateAnim(-50);
     });
 
     return () => document.removeEventListener("scroll", () => {});
@@ -40,15 +45,41 @@ function MoreLess() {
 
   return (
     <Box sx={classes.root}>
-      <Container maxWidth="xl" ref={wwdRef}>
+      <Container maxWidth="xl" ref={wwdRef} sx={{ position: "relative" }}>
         <Fade bottom>
           <Typography component="h2">What we do?</Typography>
+        </Fade>
+        <Fade left>
+          <img
+            src={"/assets/Virbusser website-41.png"}
+            alt=""
+            style={{
+              position: "absolute",
+              right: rotateAnim,
+              width: 225,
+              top: -200,
+              transition: "all 1s ease",
+            }}
+          />
         </Fade>
       </Container>
 
       {/* more of grid */}
       <Box sx={classes.moloGridContainer}>
         <Box sx={classes.moreOfText}>
+          <Zoom>
+            <img
+              src={"/assets/Virbusser website-37.png"}
+              alt=""
+              style={{
+                width: 85,
+                position: "absolute",
+                left: 75,
+                top: -50,
+                zIndex: 10,
+              }}
+            />
+          </Zoom>
           <Typography paragraph sx={{ color: colors.lightGreen }}>
             <Fade top>more of</Fade>
           </Typography>
@@ -92,6 +123,45 @@ function MoreLess() {
           <Typography paragraph>
             <Fade top>less of</Fade>
           </Typography>
+          <Zoom>
+            <img
+              src={"/assets/Virbusser website-41.png"}
+              alt=""
+              style={{
+                position: "absolute",
+                width: 200,
+                top: -65,
+                left: -100,
+                zIndex: -1,
+              }}
+            />
+          </Zoom>
+          <Zoom>
+            <img
+              src={"/assets/Virbusser website-41.png"}
+              alt=""
+              style={{
+                position: "absolute",
+                width: 200,
+                bottom: -120,
+                left: -600,
+                zIndex: -1,
+              }}
+            />
+          </Zoom>
+          <Zoom>
+            <img
+              src={"/assets/Virbusser website-37.png"}
+              alt=""
+              style={{
+                position: "absolute",
+                width: 100,
+                left: "-60vw",
+                top: -50,
+                zIndex: -1,
+              }}
+            />
+          </Zoom>
         </Box>
         <Box
           sx={{
@@ -212,6 +282,7 @@ const useStyles = (theme) => ({
       height: 75,
       width: 75,
       mt: 2,
+      ml: -1.15,
       [theme.breakpoints.down("md")]: {
         height: 60,
         width: 60,
@@ -234,7 +305,7 @@ const useStyles = (theme) => ({
     "&:hover:after": {
       backgroundColor: "rgba(255,255,255,0)",
       width: "250%",
-      transition: "all .5s ease-in-out",
+      transition: "all .75s ease-in-out",
     },
   },
 
@@ -284,6 +355,12 @@ const useStyles = (theme) => ({
         right: 0,
         top: 40,
         fontSize: 28,
+      },
+    },
+
+    "& img:nth-child(2)": {
+      [theme.breakpoints.down("sm")]: {
+        display: "none",
       },
     },
   },
