@@ -89,6 +89,7 @@ function Support() {
               top: -250,
               right: rotateAnim,
               transition: "all .75s ease-in",
+              zIndex: -1,
             },
             "& img:nth-child(2)": {
               width: 200,
@@ -96,6 +97,7 @@ function Support() {
               bottom: -250,
               left: rotateAnim,
               transition: "all .75s ease-in",
+              zIndex: -1,
             },
           }}
         >

@@ -17,6 +17,8 @@ function Services() {
 
   let [rotateAnim, setRotateAnim] = useState(25);
 
+  const svRef = useRef();
+
   useLayoutEffect(() => {
     document.addEventListener("scroll", () => {
       setAnimDisplay(true);
@@ -150,6 +152,10 @@ function Services() {
                   points: ["Point 1", "Point 2", "Point 3", "Point 4"],
                 });
                 setActive([true, false, false, false, false, false]);
+                svRef.current?.scrollIntoView({
+                  behavior: "smooth",
+                  block: "center",
+                });
               }}
             />
             <ServiceElem
@@ -163,6 +169,10 @@ function Services() {
                   points: ["Point 1", "Point 2", "Point 3", "Point 4"],
                 });
                 setActive([false, true, false, false, false, false]);
+                svRef.current?.scrollIntoView({
+                  behavior: "smooth",
+                  block: "center",
+                });
               }}
             />
             <ServiceElem
@@ -176,6 +186,10 @@ function Services() {
                   points: ["Point 1", "Point 2", "Point 3", "Point 4"],
                 });
                 setActive([false, false, true, false, false, false]);
+                svRef.current?.scrollIntoView({
+                  behavior: "smooth",
+                  block: "center",
+                });
               }}
             />
             <ServiceElem
@@ -189,6 +203,10 @@ function Services() {
                   points: ["Point 1", "Point 2", "Point 3", "Point 4"],
                 });
                 setActive([false, false, false, true, false, false]);
+                svRef.current?.scrollIntoView({
+                  behavior: "smooth",
+                  block: "center",
+                });
               }}
             />
             <ServiceElem
@@ -202,6 +220,10 @@ function Services() {
                   points: ["Point 1", "Point 2", "Point 3", "Point 4"],
                 });
                 setActive([false, false, false, false, true, false]);
+                svRef.current?.scrollIntoView({
+                  behavior: "smooth",
+                  block: "center",
+                });
               }}
             />
             <ServiceElem
@@ -215,12 +237,16 @@ function Services() {
                   points: ["Point 1", "Point 2", "Point 3", "Point 4"],
                 });
                 setActive([false, false, false, false, false, true]);
+                svRef.current?.scrollIntoView({
+                  behavior: "smooth",
+                  block: "center",
+                });
               }}
             />
           </Box>
 
           <Fade right>
-            <Box sx={classes.budgetingContainer}>
+            <Box sx={classes.budgetingContainer} ref={svRef}>
               <Box
                 sx={{
                   position: "relative",
@@ -232,7 +258,9 @@ function Services() {
                   },
                 }}
               >
-                <Typography component="h4">{serviceData.title}</Typography>
+                <Typography component="h4" id="service_data_view">
+                  {serviceData.title}
+                </Typography>
                 <Zoom>
                   <img
                     src={`/assets/Virbusser website-37.png`}
@@ -358,60 +386,6 @@ const useStyles = (theme) => ({
         "&:nth-child(5)": { mt: 0 },
         "&:nth-child(3)": { mt: 0 },
         "&:nth-child(4)": { mt: 0 },
-      },
-    },
-  },
-  serviceGridElement: {
-    cursor: "pointer",
-    height: 250,
-    width: 250,
-    backgroundColor: colors.darkTile,
-    borderRadius: 3,
-    "&:hover": {
-      backgroundColor: colors.lightGreen,
-      boxShadow: "1px 1px 1px -5px rgba(81,196,137,0.74)",
-      "& section": {
-        "& p": {
-          color: "whitesmoke",
-        },
-      },
-      transition: ".2s ease",
-    },
-
-    [theme.breakpoints.down("lg")]: {
-      mt: 0,
-      width: 300,
-      height: 300,
-    },
-
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "flex-start",
-
-    "& section": {
-      p: 3.5,
-      display: "flex",
-      flexDirection: "column",
-
-      [theme.breakpoints.down("md")]: {
-        alignItems: "flex-start",
-      },
-
-      "& img": {
-        height: 100,
-        width: 100,
-        ml: -3,
-      },
-
-      "& p": {
-        fontSize: 16,
-        fontWeight: "bold",
-        color: colors.dimText,
-        width: 125,
-        [theme.breakpoints.down("md")]: {
-          width: 200,
-          fontSize: 18,
-        },
       },
     },
   },
