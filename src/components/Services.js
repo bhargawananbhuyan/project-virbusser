@@ -407,6 +407,7 @@ const useStyles = (theme) => ({
       px: 4.5,
       [theme.breakpoints.down("md")]: {
         fontSize: 22,
+        textAlign: "center",
       },
     },
     "& h4": {

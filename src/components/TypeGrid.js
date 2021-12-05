@@ -432,9 +432,19 @@ const useStyles = ({ theme, animations }) => ({
         "& h4": { width: 200 },
         "& p": { width: 250, fontSize: 16 },
         "& img": { width: 125 },
+        "&:nth-child(1)": {
+          "& img": {
+            transform: `translateX(${animations[0] / 150}rem)`,
+          },
+        },
         "&:nth-child(2)": { "& img": { width: 300, right: -25 } },
         "&:nth-child(5)": {
-          "& img": { width: 125, bottom: 5, right: 5 },
+          "& img": {
+            width: 125,
+            bottom: 5,
+            right: 5,
+            transform: `translateX(${animations[3] / 150}rem)`,
+          },
           "& p": { width: 200 },
         },
         "&:nth-child(3)": {
