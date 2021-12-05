@@ -13,18 +13,18 @@ function TypeGrid() {
   let [forOne, setForOne] = useState(0);
   let [forTwo, setForTwo] = useState(0);
   let [forThree, setForThree] = useState(0);
-  let [forFour, setForFour] = useState(0);
+  // let [forFour, setForFour] = useState(0);
   let [forFive, setForFive] = useState(0);
 
   const ref_one = useRef();
   const ref_two = useRef();
   const ref_three = useRef();
-  const ref_four = useRef();
+  // const ref_four = useRef();
   const ref_five = useRef();
 
   const classes = useStyles({
     theme,
-    animations: [forOne, forTwo, forThree, forFour, forFive],
+    animations: [forOne, forTwo, forThree, forFive],
   });
 
   useLayoutEffect(() => {
@@ -33,7 +33,7 @@ function TypeGrid() {
         ref_one.current?.getBoundingClientRect().top,
         ref_two.current?.getBoundingClientRect().top,
         ref_three.current?.getBoundingClientRect().top,
-        ref_four.current?.getBoundingClientRect().top,
+        // ref_four.current?.getBoundingClientRect().top,
         ref_five.current?.getBoundingClientRect().top,
       ];
 
@@ -45,8 +45,8 @@ function TypeGrid() {
         setForTwo(0);
       }
 
-      tops[3] < 450 ? setForThree(-150) : setForThree(0);
-      tops[4] < 450 ? setForFive(-250) : setForFive(0);
+      tops[2] < 450 ? setForThree(-150) : setForThree(0);
+      tops[3] < 450 ? setForFive(-250) : setForFive(0);
     });
   }, []);
 
@@ -104,7 +104,9 @@ function TypeGrid() {
               alt="workflow tracking & document management"
             />
           </Box>
-          <Box ref={ref_four}>
+          <Box
+          // ref={ref_four}
+          >
             <Typography component="h4">
               ERP & Accounting tools support
             </Typography>
@@ -420,7 +422,7 @@ const useStyles = ({ theme, animations }) => ({
           width: 200,
           bottom: 20,
           right: 20,
-          transform: `translateX(${animations[4] / 100}rem)`,
+          transform: `translateX(${animations[3] / 100}rem)`,
         },
         "& p": { width: "50%" },
         flexGrow: 1,
