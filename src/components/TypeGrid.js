@@ -4,29 +4,59 @@ import { Box } from "@mui/system";
 import colors from "../utils/myColors";
 import Fade from "react-reveal/Fade";
 import Zoom from "react-reveal/Zoom";
-import Reveal from "react-reveal/Pulse";
+import Pulse from "react-reveal/Pulse";
 import { useLayoutEffect, useRef, useState } from "react";
 
 function TypeGrid() {
   const theme = useTheme();
 
-  const typeRef = useRef();
-  let [scale, setScale] = useState(0);
+  let [forOne, setForOne] = useState(0);
+  let [forTwo, setForTwo] = useState(0);
+  let [forThree, setForThree] = useState(0);
+  let [forFour, setForFour] = useState(0);
+  let [forFive, setForFive] = useState(0);
 
-  const classes = useStyles(theme, scale);
+  const ref_one = useRef();
+  const ref_two = useRef();
+  const ref_three = useRef();
+  const ref_four = useRef();
+  const ref_five = useRef();
+
+  const classes = useStyles({
+    theme,
+    animations: [forOne, forTwo, forThree, forFour, forFive],
+  });
+
   useLayoutEffect(() => {
     document.addEventListener("scroll", () => {
-      const top = typeRef.current?.getBoundingClientRect().top;
-      top < 650 ? setScale(1) : setScale(0);
+      const tops = [
+        ref_one.current?.getBoundingClientRect().top,
+        ref_two.current?.getBoundingClientRect().top,
+        ref_three.current?.getBoundingClientRect().top,
+        ref_four.current?.getBoundingClientRect().top,
+        ref_five.current?.getBoundingClientRect().top,
+      ];
+
+      if (tops[0] < 650 || tops[1] < 650) {
+        setForOne(-200);
+        setForTwo(-250);
+      } else {
+        setForOne(0);
+        setForTwo(0);
+      }
+
+      tops[3] < 450 ? setForThree(-150) : setForThree(0);
+      tops[4] < 450 ? setForFive(-250) : setForFive(0);
     });
   }, []);
 
   return (
-    <Box sx={{ display: "flex", justifyContent: "center" }} ref={typeRef}>
+    <Box sx={{ display: "flex", justifyContent: "center" }}>
       <Container maxWidth="xl">
         {/* types grid */}
         <Box sx={classes.typesGridContainer}>
           <Box
+            ref={ref_one}
             sx={{
               "& img:first-child": {
                 position: "absolute",
@@ -50,7 +80,7 @@ function TypeGrid() {
               alt="mobile enablement"
             />
           </Box>
-          <Box>
+          <Box ref={ref_two}>
             <Typography component="h4">Infrastructure</Typography>
             <Typography paragraph>
               Have the right IT infrastructure for your business, don’t over
@@ -61,7 +91,7 @@ function TypeGrid() {
               alt="infrastructure"
             />
           </Box>
-          <Box>
+          <Box ref={ref_three}>
             <Typography component="h4">
               Workflow tracking & Document management
             </Typography>
@@ -74,7 +104,7 @@ function TypeGrid() {
               alt="workflow tracking & document management"
             />
           </Box>
-          <Box>
+          <Box ref={ref_four}>
             <Typography component="h4">
               ERP & Accounting tools support
             </Typography>
@@ -87,7 +117,7 @@ function TypeGrid() {
               alt="erp & accounting tools support"
             />
           </Box>
-          <Box>
+          <Box ref={ref_five}>
             <Typography component="h4">Low cost automation</Typography>
             <Typography paragraph>
               Introduce low cost tools (excel macros and access programs) that
@@ -116,8 +146,8 @@ function TypeGrid() {
         {/* end of types grid */}
 
         {/* why virbusser grid */}
-        <Box sx={classes.whyContainer}>
-          <Fade left>
+        <Box sx={classes.whyContainer} id="why-us">
+          <Fade bottom>
             <Typography component="h5">Why Virbusser?</Typography>
           </Fade>
           <Box sx={classes.whyGrid}>
@@ -146,8 +176,9 @@ function TypeGrid() {
         {/* end of why virbusser */}
 
         {/* get in touch */}
-        <Reveal>
+        <Pulse>
           <Box
+            id="contact"
             sx={{
               ...classes.getInTouch,
               position: "relative",
@@ -186,7 +217,7 @@ function TypeGrid() {
               style={{ position: "absolute", bottom: -75, right: -85 }}
             />
           </Box>
-        </Reveal>
+        </Pulse>
 
         {/* esteemed clients */}
         <Box sx={classes.clientsContainer}>
@@ -204,7 +235,7 @@ function TypeGrid() {
   );
 }
 
-const useStyles = (theme, scale) => ({
+const useStyles = ({ theme, animations }) => ({
   clientsContainer: {
     mt: 16,
     mb: 16,
@@ -352,20 +383,45 @@ const useStyles = (theme, scale) => ({
         position: "absolute",
         bottom: 0,
         right: 5,
-        transform: `scale(${scale})`,
         transition: "all 1s ease",
       },
 
-      "&:nth-child(2)": { "& img": { width: 375, right: -40 } },
+      "&:nth-child(1)": {
+        "& img": {
+          transform: `translateX(${animations[0] / 100}rem)`,
+        },
+      },
+
+      "&:nth-child(2)": {
+        "& img": {
+          width: 375,
+          right: -40,
+          transform: `translateX(${-(animations[1] / 100)}rem)`,
+        },
+      },
       "&:nth-child(3)": {
-        "& img": { width: 300, top: 0, right: 0 },
+        "& img": {
+          width: 300,
+          top: 0,
+          right: 0,
+        },
       },
       "&:nth-child(4)": {
-        "& img": { width: "100%", bottom: 0, left: 0 },
+        "& img": {
+          width: "100%",
+          bottom: 0,
+          left: 0,
+          transform: `translateY(${animations[2] / 100}rem)`,
+        },
         "& p": { width: 450 },
       },
       "&:nth-child(5)": {
-        "& img": { width: 200, bottom: 20, right: 20 },
+        "& img": {
+          width: 200,
+          bottom: 20,
+          right: 20,
+          transform: `translateX(${animations[4] / 100}rem)`,
+        },
         "& p": { width: "50%" },
         flexGrow: 1,
       },

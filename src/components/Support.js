@@ -88,7 +88,7 @@ function Support() {
               position: "absolute",
               top: -250,
               right: rotateAnim,
-              transition: "all .75s ease-in",
+              transition: "all 1.5s ease-in",
               zIndex: -1,
             },
             "& img:nth-child(2)": {
@@ -96,12 +96,12 @@ function Support() {
               position: "absolute",
               bottom: -250,
               left: rotateAnim,
-              transition: "all .75s ease-in",
+              transition: "all 2s ease-in",
               zIndex: -1,
             },
           }}
         >
-          <img src={"/assets/Virbusser website-42.png"} alt="" />
+          <img src={"/assets/Virbusser website-37.png"} alt="" />
           <img src={"/assets/Virbusser website-41.png"} alt="" />
           <Fade left>
             <Box>

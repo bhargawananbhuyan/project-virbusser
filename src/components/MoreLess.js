@@ -28,7 +28,9 @@ function MoreLess() {
   const classes = useStyles(theme);
 
   let [wwdAnimation, setWwdAnimation] = useState(false);
-  let [rotateAnim, setRotateAnim] = useState(-50);
+  let [raOne, setRaOne] = useState(-225);
+  let [raTwo, setRaTwo] = useState(-100);
+  let [raThree, setRaThree] = useState(-450);
 
   const wwdRef = useRef();
   useLayoutEffect(() => {
@@ -37,7 +39,9 @@ function MoreLess() {
       if (wwdTopPos < 650) {
         setWwdAnimation(true);
       }
-      wwdTopPos < 750 ? setRotateAnim(-225) : setRotateAnim(-50);
+      wwdTopPos < 750 ? setRaOne(0) : setRaOne(-225);
+      wwdTopPos < 350 ? setRaTwo(0) : setRaTwo(-100);
+      wwdTopPos < 150 ? setRaThree(-650) : setRaThree(-450);
     });
 
     return () => document.removeEventListener("scroll", () => {});
@@ -49,19 +53,17 @@ function MoreLess() {
         <Fade bottom>
           <Typography component="h2">What we do?</Typography>
         </Fade>
-        <Fade left>
-          <img
-            src={"/assets/Virbusser website-41.png"}
-            alt=""
-            style={{
-              position: "absolute",
-              right: rotateAnim,
-              width: 225,
-              top: -200,
-              transition: "all 1s ease",
-            }}
-          />
-        </Fade>
+        <img
+          src={"/assets/Virbusser website-41.png"}
+          alt=""
+          style={{
+            position: "absolute",
+            right: raOne,
+            width: 225,
+            top: -200,
+            transition: "all 1.75s ease",
+          }}
+        />
       </Container>
 
       {/* more of grid */}
@@ -123,20 +125,18 @@ function MoreLess() {
           <Typography paragraph>
             <Fade top>less of</Fade>
           </Typography>
-          <Zoom>
-            <img
-              src={"/assets/Virbusser website-41.png"}
-              alt=""
-              style={{
-                position: "absolute",
-                width: 200,
-                top: -65,
-                left: -100,
-                zIndex: -1,
-              }}
+          <img
+            src={"/assets/Virbusser website-41.png"}
+            alt=""
+            style={{
+              position: "absolute",
+              width: 200,
+              top: -65,
+              left: raTwo,
+              zIndex: -1,
+              transition: "all 2s ease",
+            }}
             />
-          </Zoom>
-          <Zoom>
             <img
               src={"/assets/Virbusser website-41.png"}
               alt=""
@@ -144,11 +144,11 @@ function MoreLess() {
                 position: "absolute",
                 width: 200,
                 bottom: -120,
-                left: -600,
+                left: raThree,
                 zIndex: -1,
+                transition: "all 2s ease",
               }}
             />
-          </Zoom>
           <Zoom>
             <img
               src={"/assets/Virbusser website-37.png"}

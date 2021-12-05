@@ -9,7 +9,7 @@ function Header() {
   return (
     <Box component="header" sx={classes.root}>
       <Container sx={classes.content} maxWidth="xl">
-        <a href="/" style={classes.logo}>
+        <a href="/#" style={classes.logo}>
           <img
             src={"/assets/Virbusser website-40.png"}
             width={150}
@@ -18,7 +18,7 @@ function Header() {
         </a>
 
         <nav>
-          <a href="/">Home</a>
+          <a href="/#">Home</a>
           <a href="#services">Services</a>
           <a href="#why-us">Why us?</a>
           <a href="#contact">Contact</a>
@@ -30,12 +30,12 @@ function Header() {
 
 const useStyles = (theme) => ({
   root: {
-    position: "fixed",
-    top: 0,
-    left: 0,
-    width: "100%",
+    // position: "abs",
+    // top: 0,
+    // left: 0,
+    // width: "100%",
     backgroundColor: colors.bgPrimary,
-    zIndex: 100,
+    // zIndex: 100,
     boxShadow: "0px 0px 15px -10px rgb(0,0,0,.5)",
 
     "& nav a": {

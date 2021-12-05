@@ -125,7 +125,7 @@ const useStyles = (theme, xOffset) => ({
     width: "100%",
     display: "flex",
     alignItems: "center",
-    justifyContent: "space-between",
+    justifyContent: "space-around",
     [theme.breakpoints.down("md")]: {
       flexDirection: "column-reverse",
     },

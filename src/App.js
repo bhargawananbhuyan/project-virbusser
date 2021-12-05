@@ -5,11 +5,13 @@ import MoreLess from "./components/MoreLess";
 import Services from "./components/Services";
 import Support from "./components/Support";
 import TypeGrid from "./components/TypeGrid";
+import Header from "./components/Header";
 import colors from "./utils/myColors";
 
 function App() {
   return (
     <Box className="app">
+      <Header />
       <Landing />
 
       <Box

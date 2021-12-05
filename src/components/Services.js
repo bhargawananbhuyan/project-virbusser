@@ -28,7 +28,7 @@ function Services() {
         setClientDisplay(true);
       }
 
-      window.scrollY > 50 ? setRotateAnim(-100) : setRotateAnim(25);
+      window.scrollY > 450 ? setRotateAnim(-120) : setRotateAnim(25);
     });
   }, []);
 
@@ -79,10 +79,10 @@ function Services() {
             width="auto"
             style={{
               position: "absolute",
-              bottom: -35,
+              bottom: -15,
               left: rotateAnim,
               zIndex: -10,
-              transition: "all 1s ease",
+              transition: "all 1.5s ease",
             }}
           />
           <img
@@ -92,10 +92,10 @@ function Services() {
             width="auto"
             style={{
               position: "absolute",
-              top: -35,
+              top: -25,
               right: rotateAnim,
               zIndex: -9,
-              transition: "all 1s ease",
+              transition: "all 1.5s ease",
             }}
           />
         </Box>
@@ -134,7 +134,7 @@ function Services() {
         </Box>
       </Box>
 
-      <Container maxWidth="xl" sx={classes.allServicesContainer}>
+      <Container maxWidth="xl" sx={classes.allServicesContainer} id="services">
         <Fade bottom>
           <Typography component="h2">Our Services</Typography>
         </Fade>
