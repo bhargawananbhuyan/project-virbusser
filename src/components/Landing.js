@@ -131,6 +131,7 @@ const useStyles = (theme, xOffset) => ({
       flexDirection: "column-reverse",
       p: 3.5,
       mx: 0,
+      mt: 10,
     },
   },
   introText: {

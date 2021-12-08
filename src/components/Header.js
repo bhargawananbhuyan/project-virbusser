@@ -1,14 +1,14 @@
-import { Container, useTheme, IconButton } from "@mui/material";
+import { Close, Menu } from "@mui/icons-material";
+import { Container, IconButton, useTheme } from "@mui/material";
 import { Box } from "@mui/system";
-import colors from "../utils/myColors";
-import { Menu, Close } from "@mui/icons-material";
 import { useState } from "react";
+import colors from "../utils/myColors";
 
 function Header() {
   const theme = useTheme();
-  const classes = useStyles(theme);
 
-  let [displayNav, setDisplayNav] = useState(false);
+  let [show, setShow] = useState(false);
+  const classes = useStyles(theme, show);
 
   return (
     <>
@@ -22,7 +22,7 @@ function Header() {
             />
           </a>
 
-          <nav>
+          <nav className="d-nav">
             <a href="/#">Home</a>
             <a href="#services">Services</a>
             <a href="#why-us">Why us?</a>
@@ -32,8 +32,27 @@ function Header() {
       </Box>
 
       <>
-        <Box component="header" sx={classes.rootMob}>
-          <div>
+        <Box
+          sx={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            backgroundColor: colors.bgPrimary,
+            width: "100%",
+            zIndex: 20,
+            [theme.breakpoints.up("md")]: {
+              display: "none",
+            },
+          }}
+        >
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              p: 2,
+            }}
+          >
             <a href="/#">
               <img
                 src={"/assets/Virbusser website-40.png"}
@@ -42,50 +61,28 @@ function Header() {
               />
             </a>
 
-            <IconButton onClick={() => setDisplayNav(!displayNav)}>
-              {displayNav ? <Close /> : <Menu />}
+            <IconButton
+              onClick={() => setShow(!show)}
+              sx={{
+                color: "whitesmoke",
+              }}
+            >
+              {show ? <Close /> : <Menu />}
             </IconButton>
-          </div>
+          </Box>
         </Box>
 
-        <Box
-          component="nav"
-          sx={{
-            position: "fixed",
-            top: 0,
-            left: displayNav ? 0 : "100%",
-            height: "100vh",
-            width: "100%",
-            zIndex: 19,
-            backgroundColor: colors.bgPrimary,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            flexDirection: "column",
-            rowGap: 5,
-            transition: ".5s ease",
-
-            "& a": {
-              color: "whitesmoke",
-              textDecoration: "none",
-              fontSize: 24,
-            },
-
-            [theme.breakpoints.up("md")]: {
-              display: "none",
-            },
-          }}
-        >
-          <a href="/#" onClick={() => setDisplayNav(!displayNav)}>
+        <Box component="nav" sx={classes.mobNav}>
+          <a href="/#" onClick={() => setShow(!show)}>
             Home
           </a>
-          <a href="#services" onClick={() => setDisplayNav(!displayNav)}>
+          <a href="#services" onClick={() => setShow(!show)}>
             Services
           </a>
-          <a href="#why-us" onClick={() => setDisplayNav(!displayNav)}>
+          <a href="#why-us" onClick={() => setShow(!show)}>
             Why us?
           </a>
-          <a href="#contact" onClick={() => setDisplayNav(!displayNav)}>
+          <a href="#contact" onClick={() => setShow(!show)}>
             Contact
           </a>
         </Box>
@@ -94,12 +91,12 @@ function Header() {
   );
 }
 
-const useStyles = (theme) => ({
+const useStyles = (theme, show) => ({
   root: {
     backgroundColor: colors.bgPrimary,
     boxShadow: "0px 0px 15px -10px rgb(0,0,0,.5)",
 
-    "& nav a": {
+    "& .d-nav a": {
       color: "whitesmoke",
       textDecoration: "none",
       mx: 3.5,
@@ -107,9 +104,7 @@ const useStyles = (theme) => ({
     },
 
     [theme.breakpoints.down("md")]: {
-      "& *": {
-        display: "none",
-      },
+      display: "none",
     },
   },
 
@@ -127,30 +122,31 @@ const useStyles = (theme) => ({
     color: "whitesmoke",
   },
 
-  rootMob: {
-    [theme.breakpoints.up("md")]: {
-      "& *": {
-        display: "none",
-      },
-    },
+  mobNav: {
     position: "fixed",
     top: 0,
-    left: 0,
+    left: show ? 0 : "100%",
+    transition: ".5s ease-in-out",
+    height: "100vh",
     width: "100%",
     backgroundColor: colors.bgPrimary,
-    zIndex: 20,
-    "& div": {
-      p: 2,
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "space-between",
+    zIndex: 19,
+    [theme.breakpoints.up("md")]: {
+      display: "none",
+    },
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection: "column",
+    rowGap: 5,
 
-      "& img": {
-        mt: 0.25,
-      },
-
-      "& button": {
-        color: "whitesmoke",
+    "& a": {
+      display: "block !important",
+      color: "whitesmoke",
+      fontSize: 24,
+      textDecoration: "none",
+      [theme.breakpoints.up("md")]: {
+        display: "none",
       },
     },
   },
