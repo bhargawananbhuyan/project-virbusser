@@ -313,7 +313,7 @@ const useStyles = ({ theme, animations }) => ({
       p: 5,
       display: "flex",
       alignItems: "flex-end",
-      [theme.breakpoints.down("md")]: { width: 300, height: 275 },
+      [theme.breakpoints.down("md")]: { width: 275, height: 275 },
       cursor: "pointer",
       backgroundSize: "cover",
       "&:nth-child(1)": {
@@ -338,7 +338,7 @@ const useStyles = ({ theme, animations }) => ({
       },
       boxShadow: "inset 0px 0px 100px 125px rgba(0, 0, 0, 0.5)",
       "&:hover": {
-        transition: ".25s ease",
+        transition: ".25s ease-in-out",
         transform: "scale(1.05)",
 
         "& p": {
@@ -431,10 +431,10 @@ const useStyles = ({ theme, animations }) => ({
       [theme.breakpoints.down("sm")]: {
         "& h4": { width: 200 },
         "& p": { width: 250, fontSize: 16 },
-        "& img": { width: 125 },
+        "& img": { width: 100 },
         "&:nth-child(1)": {
           "& img": {
-            transform: `translateX(${animations[0] / 150}rem)`,
+            transform: `translateX(${animations[0] / 250}rem)`,
           },
         },
         "&:nth-child(2)": { "& img": { width: 300, right: -25 } },
@@ -442,13 +442,16 @@ const useStyles = ({ theme, animations }) => ({
           "& img": {
             width: 125,
             bottom: 5,
-            right: 5,
-            transform: `translateX(${animations[3] / 150}rem)`,
+            right: 2.5,
+            transform: `translateX(${animations[3] / 250}rem)`,
           },
           "& p": { width: 200 },
         },
         "&:nth-child(3)": {
           pb: 7.5,
+          "& img": {
+            width: 200,
+          },
         },
         "&:nth-child(4)": {
           "& img": { width: "100%", bottom: 0, left: 0 },
@@ -497,6 +500,11 @@ const useStyles = ({ theme, animations }) => ({
         "& div": { fontSize: 16 },
       },
       "& button": { fontSize: 16 },
+      "& img": {
+        width: 175,
+        height: "auto",
+      },
+      height: 350,
     },
   },
 });

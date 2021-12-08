@@ -40,8 +40,8 @@ function MoreLess() {
         setWwdAnimation(true);
       }
       wwdTopPos < 750 ? setRaOne(0) : setRaOne(-225);
-      wwdTopPos < 350 ? setRaTwo(0) : setRaTwo(-100);
-      wwdTopPos < 150 ? setRaThree(-650) : setRaThree(-450);
+      wwdTopPos < 0 ? setRaTwo(0) : setRaTwo(-100);
+      wwdTopPos < 0 ? setRaThree(-650) : setRaThree(-450);
     });
 
     return () => document.removeEventListener("scroll", () => {});
@@ -136,19 +136,19 @@ function MoreLess() {
               zIndex: -1,
               transition: "all 2s ease",
             }}
-            />
-            <img
-              src={"/assets/Virbusser website-41.png"}
-              alt=""
-              style={{
-                position: "absolute",
-                width: 200,
-                bottom: -120,
-                left: raThree,
-                zIndex: -1,
-                transition: "all 2s ease",
-              }}
-            />
+          />
+          <img
+            src={"/assets/Virbusser website-41.png"}
+            alt=""
+            style={{
+              position: "absolute",
+              width: 200,
+              bottom: -120,
+              left: raThree,
+              zIndex: -1,
+              transition: "all 2s ease",
+            }}
+          />
           <Zoom>
             <img
               src={"/assets/Virbusser website-37.png"}
