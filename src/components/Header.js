@@ -40,6 +40,7 @@ function Header() {
             backgroundColor: colors.bgPrimary,
             width: "100%",
             zIndex: 20,
+            boxShadow: "0px 0px 15px -10px rgb(0,0,0,.5)",
             [theme.breakpoints.up("md")]: {
               display: "none",
             },
