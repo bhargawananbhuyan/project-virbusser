@@ -41,7 +41,9 @@ function Landing() {
               Enabling entrepreneurs to focus on business, leave finance support
               functions to trained professionals.
             </Typography>
-            <Button variant="contained">Get started</Button>
+            <Button variant="contained" disableElevation disableRipple>
+              Get started
+            </Button>
           </Box>
         </Fade>
 
@@ -158,8 +160,8 @@ const useStyles = (theme, xOffset) => ({
       px: 2.5,
       py: 1.5,
       color: colors.bgLanding,
-      fontFamily: "'Roboto', sans-serif !important",
-      "&:hover": { backgroundColor: colors.paleYellow },
+      boxShadow: `0px 0px 15px -2.5px ${colors.paleYellow}`,
+      "&:hover": { backgroundColor: colors.paleYellow, boxShadow: "none" },
     },
     [theme.breakpoints.down("sm")]: {
       "& button": {

@@ -201,7 +201,9 @@ function TypeGrid() {
                   <h4>Get in touch with us</h4>
                   <div>For more details get in touch with us</div>
                 </Typography>
-                <Button variant="contained">Contact</Button>
+                <Button variant="contained" disableElevation disableRipple>
+                  Contact
+                </Button>
               </Fade>
             </Box>
             <img
@@ -275,8 +277,10 @@ const useStyles = ({ theme, animations }) => ({
       color: colors.dimBg,
       mx: 3.5,
       my: 2,
+      transition: ".25s ease",
       "&:hover": {
         color: "whitesmoke",
+        transition: "color .25s ease",
       },
     },
   },
@@ -334,16 +338,18 @@ const useStyles = ({ theme, animations }) => ({
         fontWeight: "bold",
         fontSize: 22,
         color: "whitesmoke",
+        transition: ".25s ease",
         "& span": { color: colors.dimText },
       },
       boxShadow: "inset 0px 0px 100px 125px rgba(0, 0, 0, 0.5)",
+      transition: ".25s ease",
       "&:hover": {
-        transition: ".25s ease-in-out",
         transform: "scale(1.05)",
+        transition: "transform .25s ease",
 
         "& p": {
           transform: "translateY(-1rem)",
-          transition: ".25s ease",
+          transition: "transform .25s ease",
         },
       },
     },
@@ -490,7 +496,7 @@ const useStyles = ({ theme, animations }) => ({
       fontSize: 18,
       px: 2.5,
       color: colors.bgLanding,
-      fontFamily: "'Roboto', sans-serif !important",
+      boxShadow: `0px 0px 15px -2.5px ${colors.paleYellow}`,
       "&:hover": { backgroundColor: colors.paleYellow },
     },
     [theme.breakpoints.down("md")]: {

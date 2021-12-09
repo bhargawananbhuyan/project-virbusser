@@ -62,7 +62,7 @@ function Services() {
                 <Typography component="div">
                   {animDisplay ? (
                     <>
-                      <CountUp end={25} duration={1.5} suffix="+" />
+                      <CountUp end={25} duration={2} suffix="+" />
                       <span>clients</span>
                     </>
                   ) : (
@@ -298,6 +298,7 @@ const useStyles = (theme) => ({
     },
     [theme.breakpoints.between("sm", "md")]: {
       mt: -10,
+      columnGap: 2.5,
     },
   },
   clientGridElement: {
@@ -391,11 +392,7 @@ const useStyles = (theme) => ({
   },
 
   budgetingContainer: {
-    // textAlign: "center",
     mt: 3,
-    // [theme.breakpoints.up("xl")]: {
-    //   textAlign: "left",
-    // },
     color: colors.dimText,
     [theme.breakpoints.up("lg")]: {
       mt: 10,
@@ -420,6 +417,7 @@ const useStyles = (theme) => ({
       },
       [theme.breakpoints.down("sm")]: {
         fontSize: 24,
+        textAlign: "center",
       },
     },
   },

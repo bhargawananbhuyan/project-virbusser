@@ -102,6 +102,12 @@ const useStyles = (theme, show) => ({
       textDecoration: "none",
       mx: 3.5,
       fontSize: 18,
+      fontWeight: 500,
+      // transition: ".25s ease",
+      "&:hover": {
+        textDecoration: "underline",
+        // transition: "text-decoration .25s ease",
+      },
     },
 
     [theme.breakpoints.down("md")]: {
@@ -148,6 +154,9 @@ const useStyles = (theme, show) => ({
       textDecoration: "none",
       [theme.breakpoints.up("md")]: {
         display: "none",
+      },
+      "&:hover": {
+        textDecoration: "underline",
       },
     },
   },

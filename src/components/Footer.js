@@ -100,8 +100,18 @@ const useStyles = (theme) => ({
       alignItems: "center",
       justifyContent: "center",
       color: colors.paleYellow,
+      transition: ".25s ease",
+      "&:hover": {
+        backgroundColor: colors.paleYellow,
+        transition: "background-color .25s ease",
+        "& svg": {
+          color: colors.bgPrimary,
+          transition: "color .25s ease",
+        },
+      },
 
       "& svg": {
+        transition: ".25s ease",
         fontSize: 35,
         [theme.breakpoints.down("sm")]: {
           fontSize: 27,
