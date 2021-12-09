@@ -4,6 +4,7 @@ import colors from "../utils/myColors";
 import Fade from "react-reveal/Fade";
 import Reveal from "react-reveal/Reveal";
 import { useLayoutEffect, useRef, useState } from "react";
+import { Check } from "@mui/icons-material";
 
 function Support() {
   const theme = useTheme();
@@ -48,9 +49,18 @@ function Support() {
                 ].map((s, i) => (
                   <Typography
                     key={i}
-                    sx={{ py: 1, fontSize: 18, color: colors.dimText }}
+                    sx={{
+                      py: 1,
+                      fontSize: 18,
+                      color: colors.dimText,
+                      display: "flex",
+                      alignItems: "center",
+                    }}
                   >
-                    {s}
+                    <span>
+                      <Check color={colors.dimText} sx={{ mr: 1 }} />
+                    </span>
+                    <span>{s}</span>
                   </Typography>
                 ))}
               </Box>
@@ -111,21 +121,28 @@ function Support() {
               <Typography
                 sx={{ fontSize: 30, color: "whitesmoke", fontWeight: "bold" }}
               >
-                Support for people and stuff...
+                Law will take our course...
               </Typography>
               <Box component="section" sx={{ p: 3 }}>
                 {[
-                  "PF monthly filings",
-                  "ESI monthly filings",
-                  "Payroll structuring",
-                  "TDS Computations",
-                  "Staffing & book keeping team",
+                  "Contract and agreement reviews",
+                  "Standardization of repeat contracts",
+                  "Intellectual property rights",
                 ].map((s, i) => (
                   <Typography
                     key={i}
-                    sx={{ py: 1, fontSize: 18, color: colors.dimText }}
+                    sx={{
+                      py: 1,
+                      fontSize: 18,
+                      color: colors.dimText,
+                      display: "flex",
+                      alignItems: "center",
+                    }}
                   >
-                    {s}
+                    <span>
+                      <Check color={colors.dimText} sx={{ mr: 1 }} />
+                    </span>
+                    <span>{s}</span>
                   </Typography>
                 ))}
               </Box>
@@ -162,21 +179,29 @@ function Support() {
               <Typography
                 sx={{ fontSize: 30, color: "whitesmoke", fontWeight: "bold" }}
               >
-                Support for people and stuff...
+                There is still a lot more...
               </Typography>
               <Box component="section" sx={{ p: 3 }}>
                 {[
-                  "PF monthly filings",
-                  "ESI monthly filings",
-                  "Payroll structuring",
-                  "TDS Computations",
-                  "Staffing & book keeping team",
+                  "Corporate Structuring",
+                  "Business Valuation",
+                  "Treasury Management",
+                  "Preparation for Listing on Indian Bourses",
                 ].map((s, i) => (
                   <Typography
                     key={i}
-                    sx={{ py: 1, fontSize: 18, color: colors.dimText }}
+                    sx={{
+                      py: 1,
+                      fontSize: 18,
+                      color: colors.dimText,
+                      display: "flex",
+                      alignItems: "center",
+                    }}
                   >
-                    {s}
+                    <span>
+                      <Check color={colors.dimText} sx={{ mr: 1 }} />
+                    </span>
+                    <span>{s}</span>
                   </Typography>
                 ))}
               </Box>
