@@ -3,25 +3,12 @@ import { Box } from "@mui/system";
 import colors from "../utils/myColors";
 import Fade from "react-reveal/Fade";
 import Reveal from "react-reveal/Reveal";
-import { useLayoutEffect, useRef, useState } from "react";
 import { Check } from "@mui/icons-material";
+import { Controller, Scene } from "react-scrollmagic";
+import { Tween } from "react-gsap";
 
 function Support() {
   const theme = useTheme();
-
-  const rootRef = useRef();
-  let [rotateAnim, setRotateAnim] = useState(-100);
-
-  useLayoutEffect(() => {
-    document.addEventListener("scroll", () => {
-      const top = rootRef.current?.getBoundingClientRect().top;
-      if (top < 750) {
-        setRotateAnim(-350);
-      } else {
-        setRotateAnim(-100);
-      }
-    });
-  }, []);
 
   const classes = useStyles(theme);
 
@@ -30,7 +17,7 @@ function Support() {
       <Container maxWidth="xl" sx={classes.container}>
         <Box component="section">
           <Fade left>
-            <Box>
+            <Box id="section-1">
               <Typography component="h6" sx={{ color: colors.lightGreen }}>
                 — We provide more than
               </Typography>
@@ -89,32 +76,35 @@ function Support() {
         </Box>
 
         <Box
-          ref={rootRef}
           component="section"
           sx={{
             position: "relative",
-            "& img:first-child": {
-              width: 250,
-              position: "absolute",
-              top: -250,
-              right: rotateAnim,
-              transition: "all 1.5s ease-in",
-              zIndex: -1,
-            },
-            "& img:nth-child(2)": {
-              width: 200,
-              position: "absolute",
-              bottom: -250,
-              left: rotateAnim,
-              transition: "all 2s ease-in",
-              zIndex: -1,
-            },
           }}
         >
-          <img src={"/assets/Virbusser website-37.png"} alt="" />
-          <img src={"/assets/Virbusser website-41.png"} alt="" />
+          <Controller>
+            <Scene duration={3500} triggerElement={"#section-1"}>
+              <Tween
+                from={{ x: -200, rotation: 0 }}
+                to={{ x: 200, rotation: 360 }}
+              >
+                <img
+                  src={"/assets/Virbusser website-37.png"}
+                  alt=""
+                  style={{
+                    width: 250,
+                    position: "absolute",
+                    top: -250,
+                    right: -250,
+                    zIndex: -1,
+                    transition: "all .25s ease",
+                  }}
+                />
+              </Tween>
+            </Scene>
+          </Controller>
+
           <Fade left>
-            <Box>
+            <Box id="section-2">
               <Typography component="h6" sx={{ color: colors.lightGreen }}>
                 — We provide more than
               </Typography>
@@ -148,6 +138,28 @@ function Support() {
               </Box>
             </Box>
           </Fade>
+
+          <Controller>
+            <Scene duration={3000}>
+              <Tween
+                from={{ x: 0, rotation: 0 }}
+                to={{ x: -350, rotation: 360 }}
+              >
+                <img
+                  src={"/assets/Virbusser website-41.png"}
+                  alt=""
+                  style={{
+                    width: 200,
+                    position: "absolute",
+                    bottom: -250,
+                    left: -75,
+                    zIndex: -1,
+                    transition: "all .35s ease",
+                  }}
+                />
+              </Tween>
+            </Scene>
+          </Controller>
 
           <Box sx={classes.serviceCard}>
             <Reveal effect="rotateFromRight" duration={1000}>
@@ -249,7 +261,7 @@ const useStyles = (theme) => ({
     },
 
     "& section": {
-      mb: 35,
+      mb: 38,
       display: "flex",
       justifyContent: "space-between",
       alignItems: "center",
