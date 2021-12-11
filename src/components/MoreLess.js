@@ -5,6 +5,8 @@ import Fade from "react-reveal/Fade";
 import Zoom from "react-reveal/Zoom";
 import { Slide as MatFade } from "@mui/material";
 import { useLayoutEffect, useRef, useState } from "react";
+import { Controller, Scene } from "react-scrollmagic";
+import { Tween } from "react-gsap";
 
 const moreOfs = [
   { title: "Process standardization", imageId: "02" },
@@ -28,9 +30,6 @@ function MoreLess() {
   const classes = useStyles(theme);
 
   let [wwdAnimation, setWwdAnimation] = useState(false);
-  let [raOne, setRaOne] = useState(-225);
-  let [raTwo, setRaTwo] = useState(-100);
-  let [raThree, setRaThree] = useState(-450);
 
   const wwdRef = useRef();
   useLayoutEffect(() => {
@@ -39,31 +38,34 @@ function MoreLess() {
       if (wwdTopPos < 650) {
         setWwdAnimation(true);
       }
-      wwdTopPos < 750 ? setRaOne(0) : setRaOne(-225);
-      wwdTopPos < 0 ? setRaTwo(0) : setRaTwo(-100);
-      wwdTopPos < 0 ? setRaThree(-650) : setRaThree(-450);
     });
 
     return () => document.removeEventListener("scroll", () => {});
   }, []);
 
   return (
-    <Box sx={classes.root}>
+    <Box sx={classes.root} id="what_we_do">
       <Container maxWidth="xl" ref={wwdRef} sx={{ position: "relative" }}>
         <Fade bottom>
           <Typography component="h2">What we do?</Typography>
         </Fade>
-        <img
-          src={"/assets/Virbusser website-41.png"}
-          alt=""
-          style={{
-            position: "absolute",
-            right: raOne,
-            width: 225,
-            top: -200,
-            transition: "all 1.75s ease",
-          }}
-        />
+        <Controller>
+          <Scene duration={1000} triggerElement={"#what_we_do"}>
+            <Tween from={{ x: 50, rotate: 0 }} to={{ x: -200, rotate: 360 }}>
+              <img
+                src={"/assets/Virbusser website-41.png"}
+                alt=""
+                style={{
+                  position: "absolute",
+                  right: -225,
+                  width: 225,
+                  top: -200,
+                  transition: "all .5s ease",
+                }}
+              />
+            </Tween>
+          </Scene>
+        </Controller>
       </Container>
 
       {/* more of grid */}
@@ -121,34 +123,44 @@ function MoreLess() {
           </Box>
         </Box>
 
-        <Box sx={classes.lessOfText}>
+        <Box sx={classes.lessOfText} id="less_of">
           <Typography paragraph>
             <Fade top>less of</Fade>
           </Typography>
-          <img
-            src={"/assets/Virbusser website-41.png"}
-            alt=""
-            style={{
-              position: "absolute",
-              width: 200,
-              top: -65,
-              left: raTwo,
-              zIndex: -1,
-              transition: "all 2s ease",
-            }}
-          />
-          <img
-            src={"/assets/Virbusser website-41.png"}
-            alt=""
-            style={{
-              position: "absolute",
-              width: 200,
-              bottom: -120,
-              left: raThree,
-              zIndex: -1,
-              transition: "all 2s ease",
-            }}
-          />
+          <Controller>
+            <Scene duration={2000} triggerElement={"#less_of"}>
+              <Tween from={{ x: 0, rotate: 0 }} to={{ x: 250, rotate: 360 }}>
+                <img
+                  src={"/assets/Virbusser website-41.png"}
+                  alt=""
+                  style={{
+                    position: "absolute",
+                    width: 200,
+                    top: -65,
+                    left: -100,
+                    zIndex: -1,
+                    transition: "all .1s ease",
+                  }}
+                />
+              </Tween>
+            </Scene>
+            <Scene duration={1200} triggerElement={"#less_of"}>
+              <Tween from={{ x: 0, rotate: 0 }} to={{ x: -200, rotate: 360 }}>
+                <img
+                  src={"/assets/Virbusser website-41.png"}
+                  alt=""
+                  style={{
+                    position: "absolute",
+                    width: 200,
+                    bottom: -120,
+                    left: -450,
+                    zIndex: -1,
+                    transition: "all .s ease",
+                  }}
+                />
+              </Tween>
+            </Scene>
+          </Controller>
           <Zoom>
             <img
               src={"/assets/Virbusser website-37.png"}

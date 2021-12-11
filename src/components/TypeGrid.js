@@ -55,20 +55,19 @@ function TypeGrid() {
       <Container maxWidth="xl">
         {/* types grid */}
         <Box sx={classes.typesGridContainer}>
-          <Box
-            ref={ref_one}
-            sx={{
-              "& img:first-child": {
-                position: "absolute",
-                top: -50,
-                left: 100,
-                width: 100,
-                zIndex: -1,
-              },
-            }}
-          >
+          <Box ref={ref_one}>
             <Zoom>
-              <img src={"/assets/Virbusser website-37.png"} alt="" />
+              <img
+                src={"/assets/Virbusser website-37.png"}
+                alt=""
+                style={{
+                  position: "absolute",
+                  top: -50,
+                  left: 100,
+                  width: 100,
+                  zIndex: -1,
+                }}
+              />
             </Zoom>
             <Typography component="h4">Mobile Enablement</Typography>
             <Typography paragraph>
@@ -76,7 +75,7 @@ function TypeGrid() {
               daily use placing & tracking orders, status reporting
             </Typography>
             <img
-              src={"/assets/Virbusser website-30.png"}
+              src={"/assets/Virbusser website-29.png"}
               alt="mobile enablement"
             />
           </Box>
@@ -396,7 +395,9 @@ const useStyles = ({ theme, animations }) => ({
 
       "&:nth-child(1)": {
         "& img": {
-          transform: `translateX(${animations[0] / 100}rem)`,
+          // bottom: 5,
+          width: 200,
+          transform: `translateY(${animations[0] / 100}rem)`,
         },
       },
 

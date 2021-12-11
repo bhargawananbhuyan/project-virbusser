@@ -6,6 +6,8 @@ import Zoom from "react-reveal/Zoom";
 import { useState, useRef, useLayoutEffect } from "react";
 import CountUp from "react-countup";
 import ServiceElem from "./ServiceElem";
+import { Controller, Scene } from "react-scrollmagic";
+import { Tween } from "react-gsap";
 
 function Services() {
   const theme = useTheme();
@@ -14,8 +16,6 @@ function Services() {
   let [animDisplay, setAnimDisplay] = useState(false);
   const clientsRef = useRef();
   let [clientDisplay, setClientDisplay] = useState(false);
-
-  let [rotateAnim, setRotateAnim] = useState(25);
 
   const svRef = useRef();
 
@@ -27,8 +27,6 @@ function Services() {
       if (window.scrollY >= top - 350) {
         setClientDisplay(true);
       }
-
-      window.scrollY > 450 ? setRotateAnim(-120) : setRotateAnim(25);
     });
   }, []);
 
@@ -42,7 +40,7 @@ function Services() {
   return (
     <Box>
       <Box sx={{ display: "flex", placeContent: "center" }}>
-        <Box sx={classes.clientGridContainer}>
+        <Box sx={classes.clientGridContainer} id="num_clients">
           {[1, 2, 3, 4].map((i) => (
             <Fade
               key={i}
@@ -72,32 +70,43 @@ function Services() {
               </Box>
             </Fade>
           ))}
-          <img
-            src={`/assets/Virbusser website-41.png`}
-            alt=""
-            height={175}
-            width="auto"
-            style={{
-              position: "absolute",
-              bottom: -15,
-              left: rotateAnim,
-              zIndex: -10,
-              transition: "all 1.5s ease",
-            }}
-          />
-          <img
-            src={`/assets/Virbusser website-41.png`}
-            alt=""
-            height={175}
-            width="auto"
-            style={{
-              position: "absolute",
-              top: -25,
-              right: rotateAnim,
-              zIndex: -9,
-              transition: "all 1.5s ease",
-            }}
-          />
+
+          <Controller>
+            <Scene duration={1000} triggerElement={"#num_clients"}>
+              <Tween from={{ x: 25, rotate: 0 }} to={{ x: -150, rotate: 360 }}>
+                <img
+                  src={`/assets/Virbusser website-41.png`}
+                  alt=""
+                  height={175}
+                  width="auto"
+                  style={{
+                    position: "absolute",
+                    bottom: -15,
+                    left: 0,
+                    zIndex: -10,
+                    transition: "all .25s ease",
+                  }}
+                />
+              </Tween>
+            </Scene>
+            <Scene duration={1000} triggerElement={"#num_clients"}>
+              <Tween from={{ x: -25, rotate: 0 }} to={{ x: 150, rotate: 360 }}>
+                <img
+                  src={`/assets/Virbusser website-41.png`}
+                  alt=""
+                  height={175}
+                  width="auto"
+                  style={{
+                    position: "absolute",
+                    top: -20,
+                    right: 5,
+                    zIndex: -9,
+                    transition: "all .25s ease",
+                  }}
+                />
+              </Tween>
+            </Scene>
+          </Controller>
         </Box>
 
         <Box ref={clientsRef} sx={classes.clientGridSm}>
