@@ -75,7 +75,7 @@ function TypeGrid() {
 							daily use placing & tracking orders, status reporting
 						</Typography>
 						<img
-							src={"/assets/Virbusser website-29.png"}
+							src={"/assets/Virbusser website-30.png"}
 							alt="mobile enablement"
 						/>
 					</Box>
@@ -395,9 +395,9 @@ const useStyles = ({ theme, animations }) => ({
 
 			"&:nth-child(1)": {
 				"& img": {
-					// bottom: 5,
+					bottom: 0,
 					width: 200,
-					transform: `translateY(${animations[0] / 100}rem)`,
+					transform: `translateX(${animations[0] / 100}rem)`,
 				},
 			},
 
@@ -442,8 +442,7 @@ const useStyles = ({ theme, animations }) => ({
 				"&:nth-child(1)": {
 					"& img": {
 						transform: `translateX(${animations[0] / 250}rem)`,
-						width: 125,
-						right: -25,
+						width: 115,
 					},
 				},
 				"&:nth-child(2)": { "& img": { width: 300, right: -25 } },
